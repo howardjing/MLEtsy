@@ -11,10 +11,12 @@ public class User {
     
     public ArrayList<Listing> listings;
     public HashMap<String, Integer> tagDict;
+    public HashMap<Integer, Integer> idDict;
     
     public User() {
         listings = new ArrayList<Listing>();
         tagDict = new HashMap<String, Integer>();
+        idDict = new HashMap<Integer, Integer>();
     }
     
     public User(String filePath) {
@@ -31,15 +33,23 @@ public class User {
             while( (thisLine = reader.readLine()) != null) {
                 // make a new listing
                 Listing tempListing = new Listing(thisLine);
-                listings.add(tempListing);  
                 
-                // get tag counts from the listing
-                for (String tag : tempListing.getTags()) {
-                    int count = 1;
-                    if (tagDict.containsKey(tag)) {
-                        count = count + tagDict.get(tag);
+                // put this listing in the arrayList if it has not been parsed yet
+                if (!idDict.containsKey(tempListing.id)) {
+                    idDict.put(tempListing.id, tempListing.id);
+                    listings.add(tempListing);  
+                
+                    // get tag counts from the listing
+                    for (String tag : tempListing.getTags()) {
+                        int count = 1;
+                        if (tagDict.containsKey(tag)) {
+                            count = count + tagDict.get(tag);
+                        }
+                        tagDict.put(tag, count);
                     }
-                    tagDict.put(tag, count);
+                }
+                else {
+                    System.out.println("Repeat listing: " + tempListing.id);
                 }
             }
             reader.close();
@@ -50,12 +60,13 @@ public class User {
     }
     
     public String toString() {
-        return listings.toString() + "\n" + tagDict.toString();
+        return tagDict.toString();
     }
     
     // parse through data, record 
     public static void main(String args[]) {
-        User me = new User("test.txt");
+        User me = new User("userFav.txt");
         System.out.println("User: " + me);
+        System.out.println("Num Listings: " + me.listings.size());
     }
 }
