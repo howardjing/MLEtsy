@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class User {
     
     public ArrayList<Listing> listings;
+    public HashMap<String, Integer> tagDict;
     
     public User() {
         listings = new ArrayList<Listing>();
+        tagDict = new HashMap<String, Integer>();
     }
     
     public User(String filePath) {
@@ -30,6 +32,15 @@ public class User {
                 // make a new listing
                 Listing tempListing = new Listing(thisLine);
                 listings.add(tempListing);  
+                
+                // get tag counts from the listing
+                for (String tag : tempListing.getTags()) {
+                    int count = 1;
+                    if (tagDict.containsKey(tag)) {
+                        count = count + tagDict.get(tag);
+                    }
+                    tagDict.put(tag, count);
+                }
             }
             reader.close();
         }
@@ -39,7 +50,7 @@ public class User {
     }
     
     public String toString() {
-        return listings.toString();
+        return listings.toString() + "\n" + tagDict.toString();
     }
     
     // parse through data, record 

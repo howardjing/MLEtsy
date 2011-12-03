@@ -40,4 +40,8 @@ public class Listing {
         String s = id + ": " + tags.toString();
         return s;
     }
+    
+    public ArrayList<String> getTags() {
+        return tags;
+    }
 }
