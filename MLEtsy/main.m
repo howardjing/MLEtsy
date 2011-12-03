@@ -16,8 +16,6 @@ int main (int argc, const char * argv[])
     
     Key *newKey = [[Key alloc] init];
 
-    NSLog(@"%@", newKey.myKey);
-
     //this is only page one, will need to go through all pages (ie: 4317/100)...
     NSString *userListingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/users/corduroy/favorites/listings?limit=4317&page=%i&api_key=%@", 1, newKey.myKey];
     NSString *userListingResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:userListingRequest] encoding:NSUTF8StringEncoding error:NULL];

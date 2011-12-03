@@ -70,7 +70,6 @@
 		C1396775148AAAFA00FE9796 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		C1396776148AAAFA00FE9796 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		C1396777148AAAFA00FE9796 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		C139678E148AB08800FE9796 /* key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = "<group>"; };
 		C139678F148AB34F00FE9796 /* Key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		C1396790148AB34F00FE9796 /* Key.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Key.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,7 +127,6 @@
 		46D3CC4F148AA36E003B4838 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C139678E148AB08800FE9796 /* key.plist */,
 				46D3CC50148AA36E003B4838 /* MLEtsy-Prefix.pch */,
 			);
 			name = "Supporting Files";
