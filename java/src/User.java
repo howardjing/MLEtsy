@@ -65,7 +65,7 @@ public class User {
     
     // parse through data, record 
     public static void main(String args[]) {
-        User me = new User("userFav.txt");
+        User me = new User("take3.txt");
         System.out.println("User: " + me);
         System.out.println("Num Listings: " + me.listings.size());
     }

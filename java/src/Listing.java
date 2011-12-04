@@ -25,14 +25,16 @@ public class Listing {
         id = Integer.valueOf(colonTokenizer.nextToken());
         
         // tokenize the tags
-        String tagsString = colonTokenizer.nextToken();
-        System.out.println(tagsString);
-        StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
-        while (commaTokenizer.hasMoreTokens()) {
+        if (colonTokenizer.hasMoreTokens()) {
+            String tagsString = colonTokenizer.nextToken();
+            System.out.println(tagsString);
+            StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
+            while (commaTokenizer.hasMoreTokens()) {
             
-            String tag = commaTokenizer.nextToken();
-            this.tags.add(tag);
+                String tag = commaTokenizer.nextToken();
+                this.tags.add(tag);
         
+            }
         }
     }
     
