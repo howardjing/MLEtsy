@@ -3,7 +3,7 @@
 //  MLEtsy
 //
 //  Created by Howard Jing on 12/3/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 NYU. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -18,44 +18,43 @@ int main (int argc, const char * argv[])
     
     NSMutableArray *allListingIDs = [[NSMutableArray alloc] init];
     
-    for (int count = 1; count <= 44; count++) 
+    // for each of the pages
+    for (int page = 1; page <= 44; page++) 
     {
-        NSLog(@"%i", count);
-        
-        //this is only page one, will need to go through all pages (ie: 4317/100)...
-        NSString *userListingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/users/corduroy/favorites/listings?limit=4317&page=%i&api_key=%@", count, newKey.myKey];
+        NSString *userListingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/users/corduroy/favorites/listings?limit=4317&page=%i&api_key=%@", page, newKey.myKey];
         NSString *userListingResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:userListingRequest] encoding:NSUTF8StringEncoding error:NULL];
     
-        //the JSON dictionary
         NSDictionary *userListingResultDictionary = [userListingResult JSONValue];
     
-        //for each of the entries
+        // for each of the entries
         for (int i = 0; i < [[userListingResultDictionary valueForKey:@"results"] count]; i++) 
         {
             [allListingIDs addObject:[[[userListingResultDictionary valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i]];
         }
     }
     
-    for (int other = 0; other < [allListingIDs count]; other++) 
+    // for all of the listing IDs
+    for (int listingID = 0; listingID < [allListingIDs count]; listingID++) 
     {
-        
-        //listing request
-        NSString *listingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/listings/%i?api_key=%@", [[allListingIDs objectAtIndex:other] intValue], newKey.myKey];
+        // listing request
+        NSString *listingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/listings/%i?api_key=%@", [[allListingIDs objectAtIndex:listingID] intValue], newKey.myKey];
         NSString *listingResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:listingRequest] encoding:NSUTF8StringEncoding error:NULL];
         
         NSDictionary *listingResultDictionary = [listingResult JSONValue];
-    if (![[[[listingResultDictionary valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"unavailable"]) {
-        NSArray *listingTags = [[[listingResultDictionary valueForKey:@"results"] valueForKey:@"tags"] objectAtIndex:0];
         
-        NSString *string = [NSString stringWithFormat:@"%@:", [allListingIDs objectAtIndex:other]];
-        NSLog(@"%@", string);
+        // check if listing is unavailable or not (ie: this would mean no tags)
+        if (![[[[listingResultDictionary valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"unavailable"]) 
+        {
+            NSArray *listingTags = [[[listingResultDictionary valueForKey:@"results"] valueForKey:@"tags"] objectAtIndex:0];
+        
+            //print listing ID
+            NSLog(@"%@", [NSString stringWithFormat:@"%@:", [allListingIDs objectAtIndex:listingID]]);
   
-            for (int blah = 0; blah < [listingTags count]; blah++) {
-    
-                NSLog(@"%@", [listingTags objectAtIndex:blah]);
+            for (int listingTag = 0; listingTag < [listingTags count]; listingTag++) 
+            {
+                //print listing tags
+                NSLog(@"%@", [listingTags objectAtIndex:listingTag]);
             }
-        
-
         }
     }
 

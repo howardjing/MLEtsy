@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
-public class splitData {
+public class SplitData {
 
 public static void main(String args[]) {
 	 int testingSplit = 3000;
