@@ -1,17 +1,22 @@
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // items have ids and tags
 public class Item {
     
     public int id;
     public ArrayList<String> tags;
+    public ArrayList<Integer> tagsID;
     public double similarityScore;
     public double preferenceScore;
     
     public Item() {
         id = 0;
         tags = new ArrayList<String>();
+        tagsID = new ArrayList<Integer>();
+        similarityScore = 0;
+        preferenceScore = 0;
     }
     
     public Item(String data) {
@@ -45,8 +50,24 @@ public class Item {
         return s;
     }
     
+    public double getSimilarityScore() {
+        return similarityScore;
+    }
     // will have to change this to return a list of integers
     public ArrayList<String> getTags() {
         return tags;
     }
+    
+    public ArrayList<Integer> getTagsID() {
+        return tagsID;
+    }
+    
+    public void setTagsID(HashMap<String, Integer> allTagsDict) {
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        for (String tag : tags) {
+            temp.add(allTagsDict.get(tag));
+        }
+        tagsID = temp;
+    }
+    
 }

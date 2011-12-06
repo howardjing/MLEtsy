@@ -5,7 +5,9 @@ import java.util.StringTokenizer;
 
 import java.util.HashMap;
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
 // Users are a list of items
 public class User {
     
@@ -87,7 +89,7 @@ public class User {
     public static void main(String args[]) {
         User me = new User("take3.txt");
 		me.sort();
-        // System.out.println("User: " + me);
+        //System.out.println("User: " + me);
         System.out.println("Num Items: " + me.items.size());
     }
 }
