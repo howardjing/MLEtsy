@@ -15,6 +15,9 @@ public class Tester {
     public HashMap<Item, Double> itemsSimilarityScore;
     public int n; // number of nearest neighbors
     
+    // The found preferences
+    public ArrayList<RandomItem> preferences;
+    
     public Tester() {
         user = new User();
         randomItems = new RandomItems();
@@ -39,6 +42,8 @@ public class Tester {
         for (RandomItem item : randomItems.items) {
             item.setTagsID(allTagsDict);
         }
+        
+        this.findPreferences();
     }
     
     public HashMap<String,Integer> prepareAllTagsDict() {
@@ -62,7 +67,7 @@ public class Tester {
     // find the top 20 most correlated vectors;
     // for each item in randomitem, calculate the score
     // returns a sorted array of items
-    public ArrayList<Item> preferences() {
+    public void findPreferences() {
         // for each user's item, find closest random items
         for (UserItem userItem : user.getItems()) {
             userItem.findClosestItems(randomItems.getItems());
@@ -91,7 +96,18 @@ public class Tester {
         
         // sort the randomItems by randomitems'S preference score
         Collections.sort(randomItems.items, preferenceComparator);
-        return (ArrayList<Item>)randomItems.items.clone();
+        preferences = (ArrayList<RandomItem>)randomItems.items.clone();
+    }
+    
+    public static void main(String[] args) {
+        User testUser = new User("data/MadeUpTrainingData.txt");
+        RandomItems testRandomItems = new RandomItems("data/MadeUpTestingData.txt");
+        
+        Tester test = new Tester(testUser, testRandomItems);
+        for (RandomItem item : test.preferences) {
+            System.out.println(item);
+        }
+        
     }
 
 }
