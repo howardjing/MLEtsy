@@ -5,7 +5,7 @@ public class Tester {
     
     // Instance variables
     public User user;
-    public ArrayList<Item> randomItems;
+    public ArrayList<RandomItem> randomItems;
     public int n; // number of nearest neighbors
     public HashMap<Item, Double> itemsSimilarityScore;
     
@@ -35,8 +35,8 @@ public class Tester {
             userItem.findClosestItems(randomItems);
         }
         // for each random item, calculate preference score
-        for (Item item : randomItems) {
-            findPreferenceScore(item);
+        for (RandomItem item : randomItems) {
+            findPreferenceScore();
         }
         // sort the randomItems by itemsScore
         

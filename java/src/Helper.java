@@ -6,7 +6,7 @@ public class Helper {
     
     // takes two vectors as input
     // returns the cosine similarity (ranges from [-1,1] where 0 is independent)
-    public static double similarity (ArrayList<Double> a, ArrayList<Double> b) {
+    public static double similarity (ArrayList<Integer> a, ArrayList<Integer> b) {
         // TDL: check if lengths of vectors are the same
         if (a.size() != b.size()) {
             System.out.println("ERROR: VECTORS ARE NOT THE SAME LENGTH");
@@ -16,6 +16,23 @@ public class Helper {
         return (numerator/denominator);
     }
     
+    // returns dot product with sparse vectors
+    public static double dotProduct (ArrayList<Integer> a, ArrayList<Integer> b) {
+        double product = 0;
+        for (int i=0; i<a.size(); i++) {
+            if (b.contains(a.get(i))) {
+                product = product + 1;
+            }
+        }
+        return product;
+    }
+    
+    // returns the l2 norm of our sparse vector
+    public static double l2Norm(ArrayList<Integer> a) {
+        return Math.sqrt(a.size());
+    }
+    
+    // ====== FROM HERE ON OUT, NOT ACTUALLY USED ========
     // returns the dot product of two vectors
     public static double dotProduct (ArrayList<Double> a, ArrayList<Double> b) {
         double dotProduct = 0;
