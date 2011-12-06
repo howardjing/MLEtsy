@@ -3,17 +3,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.ArrayList;
 
-// Users are a list of listings
+// Users are a list of items
 public class User {
     
-    public ArrayList<Listing> listings;
+    public ArrayList<UserItem> items;
     public HashMap<String, Integer> tagDict;
     public HashMap<Integer, Integer> idDict;
     
     public User() {
-        listings = new ArrayList<Listing>();
+        items = new ArrayList<UserItem>();
         tagDict = new HashMap<String, Integer>();
         idDict = new HashMap<Integer, Integer>();
     }
@@ -23,23 +24,23 @@ public class User {
         this.process(filePath);
     }
     
-    // method takes the name of a text file formated as ListingID:tag,tag,tag...
+    // method takes the name of a text file formated as ItemID:tag,tag,tag...
     public void process(String filePath) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));    
             // read in every line
             String thisLine;
             while( (thisLine = reader.readLine()) != null) {
-                // make a new listing
-                Listing tempListing = new Listing(thisLine);
+                // make a new item
+                UserItem tempItem = new UserItem(thisLine);
                 
-                // put this listing in the arrayList if it has not been parsed yet
-                if (!idDict.containsKey(tempListing.id)) {
-                    idDict.put(tempListing.id, tempListing.id);
-                    listings.add(tempListing);  
+                // put this item in the arrayList if it has not been parsed yet
+                if (!idDict.containsKey(tempItem.id)) {
+                    idDict.put(tempItem.id, tempItem.id);
+                    items.add(tempItem);  
                 
-                    // get tag counts from the listing
-                    for (String tag : tempListing.getTags()) {
+                    // get tag counts from the item
+                    for (String tag : tempItem.getTags()) {
                         int count = 1;
                         if (tagDict.containsKey(tag)) {
                             count = count + tagDict.get(tag);
@@ -48,7 +49,7 @@ public class User {
                     }
                 }
                 else {
-                    System.out.println("Repeat listing: " + tempListing.id);
+                    System.out.println("Repeat item: " + tempItem.id);
                 }
             }
             reader.close();
@@ -58,10 +59,6 @@ public class User {
         }
     }
     
-    public String toString() {
-        return tagDict.toString();
-    }
-
 	public void sort(){
 		ArrayList myArrayList=new ArrayList(tagDict.entrySet());
 		Collections.sort(myArrayList, new MyComparator());
@@ -71,18 +68,26 @@ public class User {
 		int value=0;
 		
 		while(itr.hasNext()){
-				Map.Entry e=(Map.Entry)itr.next();
-				key = (String)e.getKey();
-				value = ((Integer)e.getValue()).intValue();
-				System.out.println(key + " = " + value); // THIS WILL PRINT EVERYTHING BEAUTIFULLY			
+			Map.Entry e=(Map.Entry)itr.next();
+			key = (String)e.getKey();
+			value = ((Integer)e.getValue()).intValue();
+			System.out.println(key + " = " + value); // THIS WILL PRINT EVERYTHING BEAUTIFULLY			
 		}
 	}
+	
+    public String toString() {
+        return tagDict.toString();
+    }
+    
+    public ArrayList<UserItem> getItems() {
+        return items;
+    }
     
     // parse through data, record 
     public static void main(String args[]) {
-        User me = new User("data/userFavoriteItems.txt");
-		me.sort(); //Sorts data by frequency and alphabetical order
-        //System.out.println("User: " + me);
-        System.out.println("Num Listings: " + me.listings.size());
+        User me = new User("take3.txt");
+		me.sort();
+        // System.out.println("User: " + me);
+        System.out.println("Num Items: " + me.items.size());
     }
 }
