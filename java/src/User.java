@@ -87,7 +87,7 @@ public class User {
     public static void main(String args[]) {
         User me = new User("take3.txt");
 		me.sort();
-        // System.out.println("User: " + me);
+        //System.out.println("User: " + me);
         System.out.println("Num Items: " + me.items.size());
     }
 }

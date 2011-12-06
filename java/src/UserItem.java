@@ -11,9 +11,11 @@ public class UserItem extends Item{
     public void findClosestItems(ArrayList<Item> randomItems) {
         // compare randomItems to this item
         for (Item random : randomItems) {
-            double similarity = Helper.similarity(self.getTags(), random.getTags())
+            random.similarityScore = Helper.similarity(self.getTags(), random.getTags())  
         }
-        // insert the item in the list
+        // sort randomItems by similarityScore
+        // NOTE: MIGHT WANT TO CLONE RANDOMITEMS
+        
         
         
     }

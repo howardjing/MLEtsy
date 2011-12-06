@@ -2,7 +2,7 @@ import java.util.StringTokenizer;
 import java.util.ArrayList;
 
 // items have ids and tags
-public class Item {
+public class Item implements Comparable<Item> {
     
     public int id;
     public ArrayList<String> tags;
@@ -12,6 +12,8 @@ public class Item {
     public Item() {
         id = 0;
         tags = new ArrayList<String>();
+        similarityScore = 0;
+        preferenceScore = 0;
     }
     
     public Item(String data) {
@@ -38,6 +40,20 @@ public class Item {
         
             }
         }
+    }
+    
+    // compares by similarity score
+    public int compareTo(Item item) {
+        if (this.similarityScore < item.similarityScore) {
+            return -1;
+        } 
+        else if (this.similarityScore > item.similarityScore) {
+            return 1;
+        } 
+        else {
+            return 0;
+        }
+        
     }
     
     public String toString() {
