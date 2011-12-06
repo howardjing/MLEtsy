@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Tester {
     
@@ -16,7 +18,7 @@ public class Tester {
     public Tester() {
         user = new User();
         randomItems = new RandomItems();
-        
+
         allTagsDict = new HashMap<String, Integer>();
         
         itemsSimilarityScore = new HashMap<Item, Double>();
@@ -29,17 +31,24 @@ public class Tester {
         this.user = user;
         this.randomItems = randomItems;
         
+        // prepare dictionary, update all items appropriately
         this.allTagsDict = this.prepareAllTagsDict();
+        for (UserItem item : user.items) {
+            item.setTagsID(allTagsDict);
+        }
+        for (RandomItem item : randomItems.items) {
+            item.setTagsID(allTagsDict);
+        }
     }
     
     public HashMap<String,Integer> prepareAllTagsDict() {
         HashMap<String, Integer> temp = new HashMap<String, Integer>();
         
-        for (String key : this.user.tagDict) {
+        for (String key : this.user.tagDict.keySet()) {
             temp.put(key, (temp.size() - 1));
         }
         
-        for (String key : this.randomItems.tagDict) {
+        for (String key : this.randomItems.tagDict.keySet()) {
             if (!temp.containsKey(key)) {
                 temp.put(key, (temp.size() - 1));
             }
@@ -56,15 +65,33 @@ public class Tester {
     public ArrayList<Item> preferences() {
         // for each user's item, find closest random items
         for (UserItem userItem : user.getItems()) {
-            userItem.findClosestItems(randomItems);
+            userItem.findClosestItems(randomItems.getItems());
         }
         
         // for each random item, calculate preference score
-        for (RandomItem item : randomItems) {
-            findPreferenceScore();
+        for (RandomItem item : randomItems.getItems()) {
+            item.findPreferenceScore(n);
         }
         
-        // sort the randomItems by itemsScore
+        // sort randomItems by preference from greatest to least
+        // I think this gives an xlint warning for some reason
+        // TDL: MAKE THIS ITS OWN CLASS???
+        Comparator<RandomItem> preferenceComparator = new Comparator<RandomItem>() {
+            // compares by similarity score
+            public int compare(RandomItem a, RandomItem b) {
+                if (a.preferenceScore < b.preferenceScore) {
+                    return 1;
+                } 
+                else if (a.preferenceScore > b.preferenceScore) {
+                    return -1;
+                } 
+                return 0;   
+            }
+        };
+        
+        // sort the randomItems by randomitems'S preference score
+        Collections.sort(randomItems.items, preferenceComparator);
+        return (ArrayList<Item>)randomItems.items.clone();
     }
 
 }

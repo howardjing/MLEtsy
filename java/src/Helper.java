@@ -7,10 +7,6 @@ public class Helper {
     // takes two vectors as input
     // returns the cosine similarity (ranges from [-1,1] where 0 is independent)
     public static double similarity (ArrayList<Integer> a, ArrayList<Integer> b) {
-        // TDL: check if lengths of vectors are the same
-        if (a.size() != b.size()) {
-            System.out.println("ERROR: VECTORS ARE NOT THE SAME LENGTH");
-        }
         double numerator = dotProduct(a,b);
         double denominator = l2Norm(a)*l2Norm(b);
         return (numerator/denominator);
@@ -33,6 +29,7 @@ public class Helper {
     }
     
     // ====== FROM HERE ON OUT, NOT ACTUALLY USED ========
+    /*
     // returns the dot product of two vectors
     public static double dotProduct (ArrayList<Double> a, ArrayList<Double> b) {
         double dotProduct = 0;
@@ -50,6 +47,7 @@ public class Helper {
         }
         return Math.sqrt(summation);
     }
+    */
     
     /*
     public static void main(String[] args) {
