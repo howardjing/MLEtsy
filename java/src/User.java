@@ -3,8 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.*;
 
 // Users are a list of listings
 public class User {
@@ -62,11 +61,28 @@ public class User {
     public String toString() {
         return tagDict.toString();
     }
+
+	public void sort(){
+		ArrayList myArrayList=new ArrayList(tagDict.entrySet());
+		Collections.sort(myArrayList, new MyComparator());
+		
+		Iterator itr=myArrayList.iterator();
+		String key="";
+		int value=0;
+		
+		while(itr.hasNext()){
+				Map.Entry e=(Map.Entry)itr.next();
+				key = (String)e.getKey();
+				value = ((Integer)e.getValue()).intValue();
+				System.out.println(key + " = " + value); // THIS WILL PRINT EVERYTHING BEAUTIFULLY			
+		}
+	}
     
     // parse through data, record 
     public static void main(String args[]) {
-        User me = new User("take3.txt");
-        System.out.println("User: " + me);
+        User me = new User("data/userFavoriteItems.txt");
+		me.sort(); //Sorts data by frequency and alphabetical order
+        //System.out.println("User: " + me);
         System.out.println("Num Listings: " + me.listings.size());
     }
 }
