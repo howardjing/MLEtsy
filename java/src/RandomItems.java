@@ -24,6 +24,12 @@ public class RandomItems {
         this.process(filePath);
     }
     
+    public RandomItems(ArrayList<RandomItem> items, ArrayList<String> tags) {
+        this();
+        this.items = items;
+        this.process(tags);
+    }
+    
     // method takes the name of a text file formated as ItemID:tag,tag,tag...
     public void process(String filePath) {
         try {
@@ -60,11 +66,23 @@ public class RandomItems {
             
         }
     }
+    
+    public void process(ArrayList<String> tags) {
+        // get a count of tags
+        for (String tag : tags) {
+            int count = 1;
+            if (tagDict.containsKey(tag)) {
+                count = count + tagDict.get(tag);
+            }
+            tagDict.put(tag, count);
+        }
+    }
 	
     public String toString() {
         return tagDict.toString();
     }
     
+    // ===== GETTERS AND SETTERS ======
     public ArrayList<RandomItem> getItems() {
         return items;
     }

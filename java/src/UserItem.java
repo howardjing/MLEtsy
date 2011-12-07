@@ -6,6 +6,11 @@ public class UserItem extends Item{
     
     public ArrayList<RandomItem> closestItems;
     
+    public UserItem() {
+        super();
+        closestItems = new ArrayList<RandomItem>();
+    }
+    
     public UserItem(String data) {
         super(data);
         closestItems = new ArrayList<RandomItem>();

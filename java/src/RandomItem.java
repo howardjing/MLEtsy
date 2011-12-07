@@ -7,6 +7,10 @@ public class RandomItem extends Item {
     // a list of user's items, and how this random item ranked wrt similarity
     public HashMap<UserItem, Integer> closestItems;
     
+    public RandomItem() {
+        super();
+        closestItems = new HashMap<UserItem, Integer>();
+    }
     public RandomItem(String data) {
         super(data);
         closestItems = new HashMap<UserItem, Integer>();
@@ -24,6 +28,8 @@ public class RandomItem extends Item {
     }
     
     // this method is really slow probably
+    // this method populates randomItem's closestItemsDict with a UserItem and a ranking'
+    // MUST BE CALLED BEFORE FINDPREFERENCESCORE
     public void setClosestItems(ArrayList<UserItem> userItems) {
         for (UserItem item : userItems) {
             if (item.closestItems.indexOf(this) < 0) {

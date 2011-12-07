@@ -46,16 +46,22 @@ public class Item {
     }
     
     public String toString() {
-        String s = id + ": " + tags.toString();
+        String s = id + ": " + tags.toString() + ": " + tagsID.toString();
         return s;
     }
+    
+    // ====== GETTERS AND SETTERS ======
     
     public double getSimilarityScore() {
         return similarityScore;
     }
-    // will have to change this to return a list of integers
+
     public ArrayList<String> getTags() {
         return tags;
+    }
+    
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
     }
     
     public ArrayList<Integer> getTagsID() {
@@ -68,6 +74,14 @@ public class Item {
             temp.add(allTagsDict.get(tag));
         }
         tagsID = temp;
+    }
+    
+    public void setTagsID(ArrayList<Integer> tagsID) {
+        this.tagsID = tagsID;
+    }
+    
+    public void setID(int id) {
+        this.id = id;
     }
     
 }

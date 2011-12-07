@@ -50,12 +50,12 @@ public class Tester {
         HashMap<String, Integer> temp = new HashMap<String, Integer>();
         
         for (String key : this.user.tagDict.keySet()) {
-            temp.put(key, (temp.size() - 1));
+            temp.put(key, (temp.size() + 1));
         }
         
         for (String key : this.randomItems.tagDict.keySet()) {
             if (!temp.containsKey(key)) {
-                temp.put(key, (temp.size() - 1));
+                temp.put(key, (temp.size() + 1));
             }
         }
         
@@ -75,6 +75,7 @@ public class Tester {
         
         // for each random item, calculate preference score
         for (RandomItem item : randomItems.getItems()) {
+            item.setClosestItems(user.getItems());
             item.findPreferenceScore(n);
         }
         
@@ -94,9 +95,10 @@ public class Tester {
             }
         };
         
-        // sort the randomItems by randomitems'S preference score
+        // sort the randomItems by randomitems's preference score
         Collections.sort(randomItems.items, preferenceComparator);
         preferences = (ArrayList<RandomItem>)randomItems.items.clone();
+        
     }
     
     public static void main(String[] args) {
@@ -104,6 +106,7 @@ public class Tester {
         RandomItems testRandomItems = new RandomItems("data/MadeUpTestingData.txt");
         
         Tester test = new Tester(testUser, testRandomItems);
+        System.out.println("Dict: " + test.allTagsDict.toString());
         for (RandomItem item : test.preferences) {
             System.out.println(item);
         }

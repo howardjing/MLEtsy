@@ -26,6 +26,12 @@ public class User {
         this.process(filePath);
     }
     
+    public User(ArrayList<UserItem> items, ArrayList<String> tags) {
+        this();
+        this.items = items;
+        this.process(tags);
+    }
+    
     // method takes the name of a text file formated as ItemID:tag,tag,tag...
     public void process(String filePath) {
         try {
@@ -61,6 +67,17 @@ public class User {
         }
     }
     
+    public void process(ArrayList<String> tags) {
+        // get a count of tags
+        for (String tag : tags) {
+            int count = 1;
+            if (tagDict.containsKey(tag)) {
+                count = count + tagDict.get(tag);
+            }
+            tagDict.put(tag, count);
+        }
+    }
+    
 	public void sort(){
 		ArrayList myArrayList=new ArrayList(tagDict.entrySet());
 		Collections.sort(myArrayList, new MyComparator());
@@ -81,6 +98,7 @@ public class User {
         return tagDict.toString();
     }
     
+    // ===== GETTERS AND SETTERS ======
     public ArrayList<UserItem> getItems() {
         return items;
     }
