@@ -52,7 +52,6 @@ public class CrossValidation {
     try {      
       for (int i=0; i<numPartitions; i++) {
         String trainPath = "data/partitions/training" + i;
-        //String testPath = "data/partitions/testing" + i;
         BufferedWriter training = new BufferedWriter(new FileWriter(trainPath));
         //BufferedWriter testing = new BufferedWriter(new FileWriter(testPath));
         for (int j=0; j<numPartitions; j++) {
