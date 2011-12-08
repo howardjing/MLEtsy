@@ -22,17 +22,6 @@ public abstract class Items {
         idDict = new HashMap<Integer, Integer>();
     }
 
-    public Items(String filePath) {
-        this();
-        this.process(filePath);
-    }
- 
-    public Items(ArrayList<Item> items, ArrayList<String> tags) {
-        this();
-        this.items = items;
-        this.process(tags);
-    }
-
     // method takes the name of a text file formated as Label: ItemID:tag,tag,tag...
     public void process(String filePath) {
         try {

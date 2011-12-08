@@ -63,7 +63,6 @@ public class RandomData {
         }
         RandomItems randomItems = new RandomItems(randomItemsList, globalRandomTags);
         
-        
         for (Item item : randomItems.items) {
             System.out.println(item);
         }
@@ -71,12 +70,14 @@ public class RandomData {
         // create UserItems
         ArrayList<String> globalUserTags = new ArrayList<String>();
         ArrayList<Item> userItemsList = new ArrayList<Item>();
+        
         for (int i=0; i<20; i++) {
             Item tempItem = randomizer.makeItem(i);
             userItemsList.add(tempItem);
             
             globalUserTags.addAll(tempItem.getTags());
         }
+        
         User user = new User(userItemsList, globalUserTags);
         
         // Test on generated data
