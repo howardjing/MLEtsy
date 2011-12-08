@@ -15,7 +15,7 @@
 
 @synthesize newKey;
 @synthesize usedRandomNumbers;
-@synthesize randomUsersIDs, randomUsersFavorites;
+@synthesize randomUsersIDs, randomUsersFavs;
 
 - (id)init
 {
@@ -29,10 +29,10 @@
         usedRandomNumbers = [[NSMutableArray alloc] init];
         
         randomUsersIDs = [[NSMutableArray alloc] init];
-        randomUsersFavorites = [[NSMutableDictionary alloc] init];
+        randomUsersFavs = [[NSMutableDictionary alloc] init];
         
         [self setUpRandomUsersData];
-        [self printData:randomUsersFavorites];
+        [self printData:randomUsersFavs];
     }
     
     return self;
@@ -45,7 +45,7 @@
     [usedRandomNumbers release];
     
     [randomUsersIDs release];
-    [randomUsersFavorites release];
+    [randomUsersFavs release];
     
     [super dealloc];
 }
@@ -105,8 +105,8 @@
 
 - (void)setUpRandomUsersData
 {
-    // getting 500 random users
-    while ([randomUsersIDs count] != 500) 
+    // getting 100 random users
+    while ([randomUsersIDs count] != 100) 
     {
         int randomUserID = [self obtainRandomNumber:7];
 
@@ -118,10 +118,11 @@
         } else if ([randomUserResult isEqualToString:[NSString stringWithFormat:@"Permission denied"]]) {
             NSLog(@"this user has privacy settings enabled");
         } else {
-            NSDictionary *randomUserResultDictionary = [randomUserResult JSONValue];
+            NSDictionary *randomUserResultJSON = [randomUserResult JSONValue];
             
-            // random user needs more than 200 favorites
-            if ([[randomUserResultDictionary valueForKey:@"count"] intValue] > 200) {
+            // random user needs more than 300 favorites
+            // however final count of favorites will likely be less than 300 (see line 168)
+            if ([[randomUserResultJSON valueForKey:@"count"] intValue] > 300) {
                     BOOL present = FALSE;
                     
                     for (NSString *randomNumber in usedRandomNumbers)
@@ -130,50 +131,52 @@
                     }
                     
                     if (present == FALSE) {
+                        NSLog(@"adding user %i", randomUserID);
+                        
                         [usedRandomNumbers addObject:[NSString stringWithFormat:@"%i", randomUserID]];
                         [randomUsersIDs addObject:[NSString stringWithFormat:@"%i", randomUserID]];
                     } else {
                         NSLog(@"this user already has been accounted for");
                     }
             } else {
-                NSLog(@"this user does not have more than 200 favorites");
+                NSLog(@"this user does not have more than 300 favorites");
             }
         }
     } 
     
     for (NSString *randomUserID in randomUsersIDs) 
     {
-        NSMutableDictionary *randomUserFavorites = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *randomUserFavs = [[NSMutableDictionary alloc] init];
         
         // for each of the pages
-        for (int page = 1; page <= 2; page++) 
+        for (int page = 1; page <= 3; page++) 
         {
-            NSString *randomUserFavoritesRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/users/%@/favorites/listings?limit=200&page=%i&api_key=%@", randomUserID, page, newKey.myKey];
-            NSString *randomUserFavoritesResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:randomUserFavoritesRequest] encoding:NSUTF8StringEncoding error:NULL];
+            NSString *randomUserFavsRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/users/%@/favorites/listings?limit=200&page=%i&api_key=%@", randomUserID, page, newKey.myKey];
+            NSString *randomUserFavsResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:randomUserFavsRequest] encoding:NSUTF8StringEncoding error:NULL];
             
-            NSDictionary *randomUserFavoritesResultDictionary = [randomUserFavoritesResult JSONValue];
+            NSDictionary *randomUserFavsResultJSON = [randomUserFavsResult JSONValue];
             
             // for each of the entries
-            for (int i = 0; i < [[randomUserFavoritesResultDictionary valueForKey:@"results"] count]; i++) 
+            for (int i = 0; i < [[randomUserFavsResultJSON valueForKey:@"results"] count]; i++) 
             {
                 // listing request
-                NSString *listingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/listings/%i?api_key=%@", [[[[randomUserFavoritesResultDictionary valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i] intValue], newKey.myKey];
+                NSString *listingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/listings/%i?api_key=%@", [[[[randomUserFavsResultJSON valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i] intValue], newKey.myKey];
                 NSString *listingResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:listingRequest] encoding:NSUTF8StringEncoding error:NULL];
                 
-                NSDictionary *listingResultDictionary = [listingResult JSONValue];
+                NSDictionary *listingResultJSON = [listingResult JSONValue];
                 
                 // check if listing is active or sold out (ie: this means tags)
-                if ([[[[listingResultDictionary valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"sold_out"] || [[[[listingResultDictionary valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"active"]) 
+                if ([[[[listingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"sold_out"] || [[[[listingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"active"]) 
                 {
-                    NSArray *listingTags = [[[listingResultDictionary valueForKey:@"results"] valueForKey:@"tags"] objectAtIndex:0];
+                    NSArray *listingTags = [[[listingResultJSON valueForKey:@"results"] valueForKey:@"tags"] objectAtIndex:0];
                     
-                    [randomUserFavorites setObject:listingTags forKey:[[[randomUserFavoritesResultDictionary valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i]];
+                    [randomUserFavs setObject:listingTags forKey:[[[randomUserFavsResultJSON valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i]];
                 }
             }
         }
         
         // dictionary of array holding dictionaries
-        [randomUsersFavorites setObject:randomUserFavorites forKey:randomUserID];
+        [randomUsersFavs setObject:randomUserFavs forKey:randomUserID];
     }
 }
 

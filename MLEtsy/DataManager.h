@@ -15,19 +15,21 @@
     Key *newKey;
     
     NSMutableArray *usedRandomNumbers;
-    NSMutableDictionary *allRandomUserIDs;
+    
+    NSMutableArray *randomUsersIDs;
+    NSMutableDictionary *randomUsersFavs;
 }
 
 @property (nonatomic, retain) Key *newKey;
 
 @property (nonatomic, retain) NSMutableArray *usedRandomNumbers;
-@property (nonatomic, retain) NSMutableDictionary *allRandomUserIDs;
+
+@property (nonatomic, retain) NSMutableArray *randomUsersIDs;
+@property (nonatomic, retain) NSMutableDictionary *randomUsersFavs;
 
 - (int)obtainRandomNumber:(int)length;
+- (void)printData:(NSMutableDictionary *)userDictionary;
 
-- (void)obtainRandomUsers;
-- (void)obtainRandomUsersFavorites;
-
-- (void)printData:(NSMutableDictionary *)dictionaryOfArrays;
+- (void)setUpRandomUsersData;
 
 @end
