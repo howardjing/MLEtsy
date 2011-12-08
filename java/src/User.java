@@ -103,11 +103,22 @@ public class User {
         return items;
     }
     
+    public HashMap<String, Integer> getTagDict() {
+        return tagDict;
+    }
+       
+       
+    // ===== MAIN METHOD SHOULD REMOVE LATER =======
     // parse through data, record 
     public static void main(String args[]) {
-        User me = new User("take3.txt");
-		me.sort();
+        User me = new User("data/userFavoriteItems.txt");
+		//me.sort();
         //System.out.println("User: " + me);
-        System.out.println("Num Items: " + me.items.size());
+        //System.out.println("Num Items: " + me.items.size());
+        // PRINT OUT STUFF FOR WORDLE:
+        WordleTextGenerator wordle = new WordleTextGenerator(me);
+        wordle.printWords();
     }
+    
+   
 }
