@@ -16,7 +16,7 @@ public class Tester {
     public int n; // number of nearest neighbors
     
     // The found preferences
-    public ArrayList<RandomItem> preferences;
+    public ArrayList<Item> preferences;
     
     public Tester() {
         user = new User();
@@ -36,10 +36,10 @@ public class Tester {
         
         // prepare dictionary, update all items appropriately
         this.allTagsDict = this.prepareAllTagsDict();
-        for (UserItem item : user.items) {
+        for (Item item : user.items) {
             item.setTagsID(allTagsDict);
         }
-        for (RandomItem item : randomItems.items) {
+        for (Item item : randomItems.items) {
             item.setTagsID(allTagsDict);
         }
         
@@ -62,6 +62,61 @@ public class Tester {
         return temp;
     }
     
+    // takes a user's item, and compares it to random item's, then updates the user's item appropriately
+    public void rankRandomItemsToComparedToUser(Item userItem, ArrayList<Item> randomItems) {
+        // compare randomItems to this item
+        for (Item random : randomItems) {
+            random.similarityScore = Helper.similarity(userItem.getTagsID(), random.getTagsID());
+        }
+        
+        // TDL: maybe make this its own class??
+        // sort randomItems by similarityScore from greatest to least
+        // I think this gives an xlint warning for some reason
+        Comparator<Item> similarityComparator = new Comparator<Item>() {
+            // compares by similarity score
+            public int compare(Item a, Item b) {
+                if (a.similarityScore < b.similarityScore) {
+                    return 1;
+                } 
+                else if (a.similarityScore > b.similarityScore) {
+                    return -1;
+                } 
+                return 0;   
+            }
+        };
+        
+        // now randomItems are in sorted order
+        Collections.sort(randomItems, similarityComparator);
+        
+        // updated userItem's closestItems hashmap
+        HashMap<Item, Integer> similarityDict = userItem.getClosestItems();
+        for (int i=0; i<randomItems.size(); i++) {
+            userItem.closestItems.put(randomItems.get(i), (i+1));
+        }
+    }
+    
+    public void rankUserItemsComparedToRandom(Item randomItem, ArrayList<Item> userItems) {
+        for (Item userItem : userItems) {
+            if (userItem.closestItems.containsKey(randomItem)) {
+                randomItem.closestItems.put(userItem, userItem.closestItems.get(randomItem));
+            }
+            else {
+                System.out.println("UH OH COULD NOT FIND CLOSEST ITEMS");
+            }
+        }
+    }
+    
+    // returns a summation of the absolute value of the correlation for a random item
+    public void computePreferenceScore(Item randomItem) {
+        double temp = 0;
+        for (Item userItem : randomItem.closestItems.keySet()) {
+            if (randomItem.closestItems.get(userItem) <= n) {
+                temp = temp + Math.abs(userItem.getSimilarityScore());
+            }
+        }
+        randomItem.preferenceScore = temp;
+    }
+    
     // algorithm:
     // for each item belonging to random user,
     // find the top 20 most correlated vectors;
@@ -69,22 +124,22 @@ public class Tester {
     // returns a sorted array of items
     public void findPreferences() {
         // for each user's item, find closest random items
-        for (UserItem userItem : user.getItems()) {
-            userItem.findClosestItems(randomItems.getItems());
+        for (Item userItem : user.getItems()) {
+            rankRandomItemsToComparedToUser(userItem, randomItems.getItems());
         }
         
         // for each random item, calculate preference score
-        for (RandomItem item : randomItems.getItems()) {
-            item.setClosestItems(user.getItems());
-            item.findPreferenceScore(n);
+        for (Item randomItem : randomItems.getItems()) {
+            rankUserItemsComparedToRandom(randomItem, user.getItems());
+            computePreferenceScore(randomItem);
         }
         
         // sort randomItems by preference from greatest to least
         // I think this gives an xlint warning for some reason
         // TDL: MAKE THIS ITS OWN CLASS???
-        Comparator<RandomItem> preferenceComparator = new Comparator<RandomItem>() {
+        Comparator<Item> preferenceComparator = new Comparator<Item>() {
             // compares by similarity score
-            public int compare(RandomItem a, RandomItem b) {
+            public int compare(Item a, Item b) {
                 if (a.preferenceScore < b.preferenceScore) {
                     return 1;
                 } 
@@ -97,7 +152,7 @@ public class Tester {
         
         // sort the randomItems by randomitems's preference score
         Collections.sort(randomItems.items, preferenceComparator);
-        preferences = (ArrayList<RandomItem>)randomItems.items.clone();
+        preferences = (ArrayList<Item>)randomItems.items.clone();
         
     }
     
@@ -107,8 +162,8 @@ public class Tester {
         
         Tester test = new Tester(testUser, testRandomItems);
         System.out.println("Dict: " + test.allTagsDict.toString());
-        for (RandomItem item : test.preferences) {
-            System.out.println(item);
+        for (Item sortedItem : test.preferences) {
+            System.out.println(sortedItem);
         }
         
     }
