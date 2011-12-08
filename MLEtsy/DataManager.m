@@ -5,6 +5,7 @@
 //  Created by Shirmung Bielefeld on 12/6/11.
 //  Copyright 2011 NYU. All rights reserved.
 //
+//  NOTE: UNFORTUNATELY THIS COULD BE WRITTEN MORE OOP-LY :(
 
 #import "DataManager.h"
 #import "SBJson.h"
@@ -15,6 +16,8 @@
 
 @synthesize newKey;
 @synthesize usedRandomNumbers;
+@synthesize ourUserFavs;
+@synthesize randomListings;
 @synthesize randomUsersIDs, randomUsersFavs;
 
 - (id)init
@@ -27,6 +30,16 @@
         newKey = [[Key alloc] init];
         
         usedRandomNumbers = [[NSMutableArray alloc] init];
+        
+        ourUserFavs = [[NSMutableDictionary alloc] init];
+        
+        //[self setUpOurUserData];
+        //[self printData:ourUserFavs];
+        
+        randomListings = [[NSMutableDictionary alloc] init];
+        
+        //[self setUpRandomListingsData];
+        //[self printData:randomListings];
         
         randomUsersIDs = [[NSMutableArray alloc] init];
         randomUsersFavs = [[NSMutableDictionary alloc] init];
@@ -44,13 +57,17 @@
     
     [usedRandomNumbers release];
     
+    [ourUserFavs release];
+    
+    [randomListings release];
+    
     [randomUsersIDs release];
     [randomUsersFavs release];
     
     [super dealloc];
 }
 
-// ~~~~~~~~~~~~~~~~~~~~FOR USE BY EVERY PART~~~~~~~~~~~~~~~~~~~~
+#pragma mark - FOR USE BY EVERY PART
 
 // generates "random number" of specific length
 - (int)obtainRandomNumber:(int)length
@@ -68,6 +85,12 @@
     int randomID = [randomNumber intValue];
     
     return randomID;
+}
+
+// obvious
+- (void)resetUsedRandomNumbers
+{
+    [usedRandomNumbers removeAllObjects];
 }
 
 // prints like this:
@@ -99,13 +122,106 @@
     }
 }
 
-// ~~~~~~~~~~~~~~~~~~~~PART 1: RANDOM LISTINGS~~~~~~~~~~~~~~~~~~~~
+#pragma mark - PART 0: OUR USER
 
-// ~~~~~~~~~~~~~~~~~~~~PART 2a: RANDOM USERS~~~~~~~~~~~~~~~~~~~~
+- (void)setUpOurUserData
+{   
+    // just to maintain printing format
+    NSMutableDictionary *spaceFiller = [[NSMutableDictionary alloc] init];
+    
+    // for each of the pages
+    for (int page = 1; page <= 44; page++) 
+    {
+        NSString *userFavsRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/users/5332839/favorites/listings?limit=4317&page=%i&api_key=%@", page, newKey.myKey];
+        NSString *userFavsResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:userFavsRequest] encoding:NSUTF8StringEncoding error:NULL];
+        
+        NSDictionary *userFavsResultJSON = [userFavsResult JSONValue];
+    
+        // for each of the entries
+        for (int i = 0; i < [[userFavsResultJSON valueForKey:@"results"] count]; i++) 
+        {
+            // listing request
+            NSString *listingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/listings/%i?api_key=%@", [[[[userFavsResultJSON valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i] intValue], newKey.myKey];
+            NSString *listingResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:listingRequest] encoding:NSUTF8StringEncoding error:NULL];
+            
+            NSDictionary *listingResultJSON = [listingResult JSONValue];
+            
+            // check if listing is active or sold out (ie: this means tags)
+            if ([[[[listingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"sold_out"] || [[[[listingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"active"]) 
+            {
+                NSArray *listingTags = [[[listingResultJSON valueForKey:@"results"] valueForKey:@"tags"] objectAtIndex:0];
+                
+                [spaceFiller setObject:listingTags forKey:[[[userFavsResultJSON valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i]];
+            }
+        }
+    }
+    
+    // dictionary of array holding dictionaries
+    [ourUserFavs setObject:spaceFiller forKey:[NSString stringWithFormat:@"%i", 5332839]];
+}
+
+#pragma mark - PART 1: RANDOM LISTINGS
+
+- (void)setUpRandomListingsData
+{
+    [self resetUsedRandomNumbers];
+    
+    // just to maintain printing format
+    NSMutableDictionary *spaceFiller = [[NSMutableDictionary alloc] init];
+
+    // get 8000 random listings
+    while ([randomListings count] != 8000) 
+    {
+        int randomListingID = [self obtainRandomNumber:7];
+    
+        NSString *randomListingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/listings/%i?api_key=%@", randomListingID, newKey.myKey];
+        NSString *randomListingResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:randomListingRequest] encoding:NSUTF8StringEncoding error:NULL];
+    
+        if ([randomListingResult isEqualToString:[NSString stringWithFormat:@"Translation_TranslatableFinder: Listing-&gt;find(%i) does not exist", randomListingID]]) {
+            NSLog(@"this listing does not exist");
+        } else {
+            NSDictionary *randomListingResultJSON = [randomListingResult JSONValue];
+        
+            // for each of the entries
+            for (int i = 0; i < [[randomListingResultJSON valueForKey:@"results"] count]; i++) 
+            {
+                BOOL present = FALSE;
+                    
+                for (NSString *randomNumber in usedRandomNumbers)
+                {
+                    if ([randomNumber isEqualToString:[NSString stringWithFormat:@"%i", randomListingID]]) present = TRUE;
+                }
+            
+                if (present == FALSE) {
+                    NSLog(@"adding listing %i", randomListingID);
+                    
+                    [usedRandomNumbers addObject:[NSString stringWithFormat:@"%i", randomListingID]];
+                    
+                    // check if listing is active or sold out (ie: this means tags)
+                    if ([[[[randomListingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"sold_out"] || [[[[randomListingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"active"]) 
+                    {
+                        NSArray *listingTags = [[[randomListingResultJSON valueForKey:@"results"] valueForKey:@"tags"] objectAtIndex:0];
+                        
+                        [spaceFiller setObject:listingTags forKey:[NSString stringWithFormat:@"%i", randomListingID]];
+                    }
+                } else {
+                    NSLog(@"this listing already has been accounted for");
+                }
+            }
+        }   
+    }
+    
+    // dictionary of array holding dictionaries
+    [randomListings setObject:spaceFiller forKey:@"spaceFiller"];
+}
+
+#pragma mark - PART 2A: RANDOM USERS
 
 - (void)setUpRandomUsersData
 {
-    // getting 100 random users
+    [self resetUsedRandomNumbers];
+    
+    // get 100 random users
     while ([randomUsersIDs count] != 100) 
     {
         int randomUserID = [self obtainRandomNumber:7];
@@ -180,6 +296,6 @@
     }
 }
 
-// ~~~~~~~~~~~~~~~~~~~~PART 2b: NOT-SO-RANDOM USERS~~~~~~~~~~~~~~~~~~~~
+#pragma mark - PART 2B: NOT-SO-RANDOM USERS
 
 @end
