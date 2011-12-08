@@ -9,12 +9,13 @@ public class WordleTextGenerator {
         this.user = user;
     }
     
-    // prints out a user's tagDic's keys value times 
+    // prints out a user's tagDict's keys value times 
     public void printWords() {
         HashMap<String, Integer> dictionary = user.getTagDict();
         for (String tag : dictionary.keySet()) {
+            String filtered = tag.toLowerCase();
             for (int i=0; i<dictionary.get(tag); i++) {
-                System.out.print(tag + " ");
+                System.out.print(filtered + " ");
             }
             System.out.println("");
         }
