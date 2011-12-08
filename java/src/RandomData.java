@@ -5,7 +5,7 @@ import java.lang.Integer;
 import java.util.Random;
 import java.util.ArrayList;
 
-// Generates an Item with 13 tags drawn from a gaussian distribution centered around a user inputted mean
+// Generates an Item with 13 tags drawn from a gaussian distribution centered around a user inputed mean
 // The standard deviation is set upon creation and defaults to 50
 public class RandomData {
     
@@ -23,16 +23,8 @@ public class RandomData {
     }
     
     // given a mean (the id), returns an arraylist of 13 random integers drawn from a gaussian
-    public RandomItem makeRandomItem(int mean) {
-        RandomItem item = new RandomItem();
-        item.setID(mean);
-        item.setTags(makeTags(mean));
-        return item;
-    }
-    
-    // same thing, but for a UserItem
-    public UserItem makeUserItem(int mean) {
-        UserItem item = new UserItem();
+    public Item makeItem(int mean) {
+        Item item = new Item();
         item.setID(mean);
         item.setTags(makeTags(mean));
         return item;
@@ -61,9 +53,9 @@ public class RandomData {
         
         // create randomItems
         ArrayList<String> globalRandomTags = new ArrayList<String>();
-        ArrayList<RandomItem> randomItemsList = new ArrayList<RandomItem>(); 
+        ArrayList<Item> randomItemsList = new ArrayList<Item>(); 
         for (int i=0; i<100; i++) {
-            RandomItem tempItem = randomizer.makeRandomItem(i);
+            Item tempItem = randomizer.makeItem(i);
             randomItemsList.add(tempItem);
             
             // record in the global tags list
@@ -72,15 +64,15 @@ public class RandomData {
         RandomItems randomItems = new RandomItems(randomItemsList, globalRandomTags);
         
         
-        for (RandomItem item : randomItems.items) {
+        for (Item item : randomItems.items) {
             System.out.println(item);
         }
         
         // create UserItems
         ArrayList<String> globalUserTags = new ArrayList<String>();
-        ArrayList<UserItem> userItemsList = new ArrayList<UserItem>();
+        ArrayList<Item> userItemsList = new ArrayList<Item>();
         for (int i=0; i<20; i++) {
-            UserItem tempItem = randomizer.makeUserItem(i);
+            Item tempItem = randomizer.makeItem(i);
             userItemsList.add(tempItem);
             
             globalUserTags.addAll(tempItem.getTags());
@@ -93,7 +85,7 @@ public class RandomData {
         //System.out.println("RandomItems: " + randomItems.toString());
         //System.out.println("Dict: " + test.allTagsDict.toString());
         System.out.println("Testing...");
-        for (RandomItem item : test.preferences) {
+        for (Item item : test.preferences) {
             System.out.println(item);
         }
         

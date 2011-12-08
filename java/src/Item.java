@@ -10,6 +10,7 @@ public class Item {
     public ArrayList<Integer> tagsID;
     public double similarityScore;
     public double preferenceScore;
+    public HashMap<Item, Integer> closestItems;
     
     public Item() {
         id = 0;
@@ -17,6 +18,7 @@ public class Item {
         tagsID = new ArrayList<Integer>();
         similarityScore = 0;
         preferenceScore = 0;
+        closestItems = new HashMap<Item, Integer>();
     }
     
     public Item(String data) {
@@ -84,4 +86,7 @@ public class Item {
         this.id = id;
     }
     
+    public HashMap<Item, Integer> getClosestItems() {
+        return closestItems;
+    }
 }

@@ -5,68 +5,74 @@ import java.util.StringTokenizer;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
 
-public class RandomItems {
-    
+// Items are a list of items
+public abstract class Items {    
+
     public ArrayList<Item> items;
-    public HashMap<Integer, Integer> idDict;
     public HashMap<String, Integer> tagDict;
-
-    public RandomItems() {
-        items = new ArrayList<Item>();
-        idDict = new HashMap<Integer, Integer>();
-        tagDict = new HashMap<String, Integer>();
-    }
+    public HashMap<Integer, Integer> idDict;
     
-    public RandomItems(String filePath) {
+    public Items() {
+        items = new ArrayList<Item>();
+        tagDict = new HashMap<String, Integer>();
+        idDict = new HashMap<Integer, Integer>();
+    }
+
+    public Items(String filePath) {
         this();
-        
         this.process(filePath);
     }
-    
-    public RandomItems(ArrayList<Item> items, ArrayList<String> tags) {
+ 
+    public Items(ArrayList<Item> items, ArrayList<String> tags) {
         this();
         this.items = items;
         this.process(tags);
     }
-    
-    // method takes the name of a text file formated as ItemID:tag,tag,tag...
+
+    // method takes the name of a text file formated as Label: ItemID:tag,tag,tag...
     public void process(String filePath) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));    
-            
+
+            // read in every line
             String thisLine;
-            
-            while((thisLine = reader.readLine()) != null) {
+
+            while( (thisLine = reader.readLine()) != null) {
                 // make a new item
                 Item tempItem = new Item(thisLine);
-                
                 // put this item in the arrayList if it has not been parsed yet
                 if (!idDict.containsKey(tempItem.id)) {
+
                     idDict.put(tempItem.id, tempItem.id);
                     items.add(tempItem);  
-                    
+
                     // get tag counts from the item
                     for (String tag : tempItem.getTags()) {
                         int count = 1;
-                        
                         if (tagDict.containsKey(tag)) {
                             count = count + tagDict.get(tag);
                         }
-                        
                         tagDict.put(tag, count);
                     }
-                } else {
+                }
+                else {
                     System.out.println("Repeat item: " + tempItem.id);
                 }
             }
-            
             reader.close();
-        } catch (IOException e) {
+        }
+
+        catch (IOException e) {
             
         }
+
     }
-    
+ 
+    // might want to unlazify this in the future
     public void process(ArrayList<String> tags) {
         // get a count of tags
         for (String tag : tags) {
@@ -77,20 +83,34 @@ public class RandomItems {
             tagDict.put(tag, count);
         }
     }
-	
+ 
+    public void sort(){
+        ArrayList myArrayList=new ArrayList(tagDict.entrySet());
+        Collections.sort(myArrayList, new MyComparator());
+
+        Iterator itr=myArrayList.iterator();
+        String key="";
+        int value=0;
+        
+        while(itr.hasNext()){
+            Map.Entry e=(Map.Entry)itr.next();
+            key = (String)e.getKey();
+            value = ((Integer)e.getValue()).intValue();
+            System.out.println(key + " = " + value); // THIS WILL PRINT EVERYTHING BEAUTIFULLY      
+        }
+    }
+    
     public String toString() {
         return tagDict.toString();
     }
-    
+ 
     // ===== GETTERS AND SETTERS ======
     public ArrayList<Item> getItems() {
         return items;
     }
-    
-    // parse through data, record 
-    public static void main(String args[]) {
-        RandomItems ourRandomItems = new RandomItems("randomItems.txt");
+ 
+    public HashMap<String, Integer> getTagDict() {
+        return tagDict;
+    }   
 
-        System.out.println("Num Items: " + ourRandomItems.items.size());
-    }
 }
