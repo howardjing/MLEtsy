@@ -34,7 +34,7 @@ public class Item {
         // tokenize the tags
         if (colonTokenizer.hasMoreTokens()) {
             String tagsString = colonTokenizer.nextToken();
-            System.out.println(tagsString);
+            //System.out.println(tagsString);
             StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
             while (commaTokenizer.hasMoreTokens()) {
             
