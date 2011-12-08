@@ -10,6 +10,7 @@
 		46D3CC4B148AA36E003B4838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D3CC4A148AA36E003B4838 /* Foundation.framework */; };
 		46D3CC4E148AA36E003B4838 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D3CC4D148AA36E003B4838 /* main.m */; };
 		46D3CC52148AA36E003B4838 /* MLEtsy.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 46D3CC51148AA36E003B4838 /* MLEtsy.1 */; };
+		C128CF04148E7F86005F19ED /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C128CF03148E7F86005F19ED /* DataManager.m */; };
 		C1396778148AAAFA00FE9796 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = C1396760148AAAFA00FE9796 /* NSObject+SBJson.m */; };
 		C1396779148AAAFA00FE9796 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C1396763148AAAFA00FE9796 /* SBJsonParser.m */; };
 		C139677A148AAAFA00FE9796 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C1396765148AAAFA00FE9796 /* SBJsonStreamParser.m */; };
@@ -44,6 +45,8 @@
 		46D3CC4D148AA36E003B4838 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		46D3CC50148AA36E003B4838 /* MLEtsy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MLEtsy-Prefix.pch"; sourceTree = "<group>"; };
 		46D3CC51148AA36E003B4838 /* MLEtsy.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = MLEtsy.1; sourceTree = "<group>"; };
+		C128CF02148E7F86005F19ED /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		C128CF03148E7F86005F19ED /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		C139675E148AAAFA00FE9796 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		C139675F148AAAFA00FE9796 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		C1396760148AAAFA00FE9796 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				46D3CC4D148AA36E003B4838 /* main.m */,
+				C128CF02148E7F86005F19ED /* DataManager.h */,
+				C128CF03148E7F86005F19ED /* DataManager.m */,
 				C139678F148AB34F00FE9796 /* Key.h */,
 				C1396790148AB34F00FE9796 /* Key.m */,
 				46D3CC51148AA36E003B4838 /* MLEtsy.1 */,
@@ -226,6 +231,7 @@
 				C1396782148AAAFA00FE9796 /* SBJsonUTF8Stream.m in Sources */,
 				C1396783148AAAFA00FE9796 /* SBJsonWriter.m in Sources */,
 				C1396791148AB34F00FE9796 /* Key.m in Sources */,
+				C128CF04148E7F86005F19ED /* DataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
