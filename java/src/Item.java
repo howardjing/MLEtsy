@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Item {
     
     public int id;
+	public int itemType;
     public ArrayList<String> tags;
     public ArrayList<Integer> tagsID;
     public double similarityScore;
@@ -14,6 +15,7 @@ public class Item {
     
     public Item() {
         id = 0;
+		itemType = 1;
         tags = new ArrayList<String>();
         tagsID = new ArrayList<Integer>();
         similarityScore = 0;
@@ -30,9 +32,12 @@ public class Item {
         // break up categories
         StringTokenizer colonTokenizer = new StringTokenizer(data, ":");
         
-        // first token is id
-        id = Integer.valueOf(colonTokenizer.nextToken());
-        
+        // first token is itemType
+		//itemType = Integer.valueOf(colonTokenizer.nextToken());
+		
+		//second token is id
+		id = Integer.valueOf(colonTokenizer.nextToken());
+		
         // tokenize the tags
         if (colonTokenizer.hasMoreTokens()) {
             String tagsString = colonTokenizer.nextToken();

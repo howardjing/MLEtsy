@@ -157,11 +157,14 @@ public class Tester {
     }
     
     public static void main(String[] args) {
-        User testUser = new User("data/MadeUpTrainingData.txt");
+      	User testUser = new User("data/MadeUpTrainingData.txt");
         RandomItems testRandomItems = new RandomItems("data/MadeUpTestingData.txt");
+
+ 	//	User testUser = new User("data/trainingFromNinePartitions");
+    //  RandomItems testRandomItems = new RandomItems("data/testingWithRandom");
         
         Tester test = new Tester(testUser, testRandomItems);
-        System.out.println("Dict: " + test.allTagsDict.toString());
+        //System.out.println("Dict: " + test.allTagsDict.toString());
         for (Item sortedItem : test.preferences) {
             System.out.println(sortedItem);
         }
