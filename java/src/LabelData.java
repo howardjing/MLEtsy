@@ -16,7 +16,7 @@ public class LabelData {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));    
             String thisLine;
-			String path = "data/labeled/userFavoriteItemsLabled";
+			String path = "data/labeled/userFavoriteItemsLabeled";
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path));		
 
 			
@@ -35,7 +35,7 @@ public class LabelData {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));    
             String thisLine;
-			String path = "data/labeled/randomLabled";
+			String path = "data/labeled/randomLabeled";
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path));		
 
 			
