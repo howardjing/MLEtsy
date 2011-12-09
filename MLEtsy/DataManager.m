@@ -19,6 +19,7 @@
 @synthesize ourUserFavs;
 @synthesize randomListings;
 @synthesize randomUsersIDs, randomUsersFavs;
+@synthesize chosenUsersIDs, chosenUsersFavs;
 
 - (id)init
 {
@@ -46,6 +47,12 @@
         
         [self setUpRandomUsersData];
         [self printData:randomUsersFavs];
+    
+        chosenUsersIDs = [[NSMutableArray alloc] init];
+        chosenUsersFavs = [[NSMutableDictionary alloc] init];
+        
+        //[self setUpChosenUsersData];
+        //[self printData:chosenUsersFavs];
     }
     
     return self;
@@ -63,6 +70,9 @@
     
     [randomUsersIDs release];
     [randomUsersFavs release];
+    
+    [chosenUsersIDs release];
+    [chosenUsersFavs release];
     
     [super dealloc];
 }
@@ -297,5 +307,66 @@
 }
 
 #pragma mark - PART 2B: NOT-SO-RANDOM USERS
+
+- (void)setUpChosenUsersData
+{
+    // get 100 chosen users chosen by our user's top 10 favorites
+    // ? users that have favorited ? items
+
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // ? users that have favorited ? items
+    
+    // 
+    for (NSString *chosenUserID in chosenUsersIDs) 
+    {
+        NSMutableDictionary *chosenUserFavs = [[NSMutableDictionary alloc] init];
+        
+        // chosen user needs more than 300 favorites
+        // however final count of favorites might be less than 300 (see line 358)
+        for (int page = 1; page <= 3; page++) 
+        {
+            NSString *chosenUserFavsRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/users/%@/favorites/listings?limit=200&page=%i&api_key=%@", chosenUserID, page, newKey.myKey];
+            NSString *chosenUserFavsResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:chosenUserFavsRequest] encoding:NSUTF8StringEncoding error:NULL];
+            
+            NSDictionary *chosenUserFavsResultJSON = [chosenUserFavsResult JSONValue];
+            
+            // for each of the entries
+            for (int i = 0; i < [[chosenUserFavsResultJSON valueForKey:@"results"] count]; i++) 
+            {
+                // listing request
+                NSString *listingRequest = [NSString stringWithFormat:@"http://openapi.etsy.com/v2/listings/%i?api_key=%@", [[[[chosenUserFavsResultJSON valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i] intValue], newKey.myKey];
+                NSString *listingResult = [NSString stringWithContentsOfURL:[NSURL URLWithString:listingRequest] encoding:NSUTF8StringEncoding error:NULL];
+                
+                NSDictionary *listingResultJSON = [listingResult JSONValue];
+                
+                // check if listing is active or sold out (ie: this means tags)
+                if ([[[[listingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"sold_out"] || [[[[listingResultJSON valueForKey:@"results"] valueForKey:@"state"] objectAtIndex:0] isEqualToString:@"active"]) 
+                {
+                    NSArray *listingTags = [[[listingResultJSON valueForKey:@"results"] valueForKey:@"tags"] objectAtIndex:0];
+                    
+                    [chosenUserFavs setObject:listingTags forKey:[[[chosenUserFavsResultJSON valueForKey:@"results"] valueForKey:@"listing_id"] objectAtIndex:i]];
+                }
+            }
+        }
+        
+        // dictionary of array holding dictionaries
+        [randomUsersFavs setObject:chosenUserFavs forKey:chosenUserID];
+    }
+}
 
 @end

@@ -22,6 +22,9 @@
     
     NSMutableArray *randomUsersIDs;
     NSMutableDictionary *randomUsersFavs;
+    
+    NSMutableArray *chosenUsersIDs;
+    NSMutableDictionary *chosenUsersFavs;
 }
 
 @property (nonatomic, retain) Key *newKey;
@@ -35,6 +38,9 @@
 @property (nonatomic, retain) NSMutableArray *randomUsersIDs;
 @property (nonatomic, retain) NSMutableDictionary *randomUsersFavs;
 
+@property (nonatomic, retain) NSMutableArray *chosenUsersIDs;
+@property (nonatomic, retain) NSMutableDictionary *chosenUsersFavs;
+
 - (int)obtainRandomNumber:(int)length;
 - (void)resetUsedRandomNumbers;
 - (void)printData:(NSMutableDictionary *)userDictionary;
@@ -42,5 +48,6 @@
 - (void)setUpOurUserData;
 - (void)setUpRandomListingsData;
 - (void)setUpRandomUsersData;
+- (void)setUpChosenUsersData;
 
 @end
