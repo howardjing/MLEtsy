@@ -156,15 +156,19 @@ public class Tester {
         
     }
     
+    public void printPreferences() {
+        for (Item sortedItem : preferences) {
+            System.out.println(sortedItem);
+        }
+    }
+    
     public static void main(String[] args) {
         User testUser = new User("data/MadeUpTrainingData.txt");
         RandomItems testRandomItems = new RandomItems("data/MadeUpTestingData.txt");
         
         Tester test = new Tester(testUser, testRandomItems);
         System.out.println("Dict: " + test.allTagsDict.toString());
-        for (Item sortedItem : test.preferences) {
-            System.out.println(sortedItem);
-        }
+        test.printPreferences();
         
     }
 

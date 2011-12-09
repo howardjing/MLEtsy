@@ -62,7 +62,7 @@ public class RandomizeData {
         }
 
 		try {
-		String path = "data/labeled/Randomized"; //Change path to change directory where randomized file will be written
+		String path = "data/randomizedTesting.txt"; //Change path to change directory where randomized file will be written
 		BufferedWriter writer = new BufferedWriter(new FileWriter(path));
 		for (int i = 0; i < numLines ; i++){
 			int temp = numbers.get(i);
@@ -77,7 +77,7 @@ public class RandomizeData {
 	
 	
 	public static void main(String args[]) {
-		RandomizeData data = new RandomizeData("data/labeled/userFavoriteItemsLabeled");
+		RandomizeData data = new RandomizeData("data/testing.txt");
 		
 	}
 	

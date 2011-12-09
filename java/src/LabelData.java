@@ -35,11 +35,12 @@ public class LabelData {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));    
             String thisLine;
-			String path = "data/labeled/randomLabeled";
+			String path = "data/labeled/randomLabelled";
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path));		
 
 			
             while( (thisLine = reader.readLine()) != null) {
+                System.out.println("WRITING");
 		        writer.write("0:" + thisLine + "\n");
             }
 			writer.close();
@@ -57,7 +58,7 @@ public class LabelData {
 	
 		LabelData randomData = new LabelData("data/randomItems.txt"); 
 		//random data to be labeled (0) *(DO THIS BEFORE YOU SEED THE RANDOMS)
-			randomData.labelAsRandom();
+		randomData.labelAsRandom();
 	
 	}
 	

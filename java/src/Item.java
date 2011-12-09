@@ -32,6 +32,7 @@ public class Item {
         // break up categories
         StringTokenizer colonTokenizer = new StringTokenizer(data, ":");
         
+        /* This is buggy, won't use while loops for now
         int counter = 1;
         while (colonTokenizer.hasMoreTokens()) {
             // first token is label
@@ -57,14 +58,28 @@ public class Item {
                 }
             }
             if (counter > 3) {
-                System.out.println("SOMETHING WENT WRONG, SHOULD ONLY HAVE 3 COLONS WHAT");
+                System.out.println("SOMETHING WENT WRONG, SHOULD ONLY HAVE 3 TOKENS WHAT");
+                break;
             }
             counter = counter + 1;
+        }
+        */
+        
+        label = Integer.valueOf(colonTokenizer.nextToken().trim());
+        id = Integer.valueOf(colonTokenizer.nextToken().trim());
+        if (colonTokenizer.hasMoreTokens()) {
+            String tagsString = colonTokenizer.nextToken().trim();
+            //System.out.println(tagsString);
+            StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
+            while (commaTokenizer.hasMoreTokens()) {
+                String tag = commaTokenizer.nextToken().trim();
+                this.tags.add(tag);
+            }
         }
     }
     
     public String toString() {
-        String s = id + ": " + tags.toString() + ": " + tagsID.toString();
+        String s = "label: " + label + " id: " + id; // + tags.toString() + ": " + tagsID.toString();
         return s;
     }
     
