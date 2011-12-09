@@ -21,7 +21,7 @@ public class Item {
         tagsID = new ArrayList<Integer>();
         similarityScore = 0;
         preferenceScore = 0;
-        closestItems = new HashMap<Item, Integer>();
+        closestItems = new HashMap<Item, Integer>(8000);
         label = -1;
     }
     
@@ -86,7 +86,7 @@ public class Item {
     }
     
     public String toString() {
-        String s = "label: " + label + " id: " + id; // + tags.toString() + ": " + tagsID.toString();
+        String s = label + "," + id; // + tags.toString() + ": " + tagsID.toString();
         return s;
     }
     

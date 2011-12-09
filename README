@@ -4,7 +4,9 @@ To compile FirstRun.java
 javac -sourcepath src -d classes src/FirstRun.java
 
 To run FirstRun.java
-java -classpath classes FirstRun
+java -Xmx2048m -classpath classes FirstRun
+
+The -Xmx2048m is to set the max heap size to 2048 mb, since it looks like our hashmaps take a lot of room
 
 
 DESCRIPTION OF WHAT WE HAVE SO FAR,
