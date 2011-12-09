@@ -7,13 +7,12 @@ To run FirstRun.java
 java -classpath classes FirstRun
 
 
-DESCRIPTION OF WHAT WE HAVE SO FAR, I DONT KNOW WHAT YOU GUYS HAVE DONE SO PLEASE WRITE A SHORT DESCRIPTION
-WE REALLY HAVE TO ORGANIZE THE WAY OUR JAVA FILES ARE SET UP BTW ITS KIND OF GROSS
+DESCRIPTION OF WHAT WE HAVE SO FAR,
 
 JAVA
 THE MOST IMPORTANT ONE:
 control: 
-	- Ranker: the main class for finding preferences, should probably be renamed to something more descriptive
+	- Ranker: the main class for finding preferences
 	- Helper: contains static functions that handle the math computation stuff
 
 For storing Etsy data:
@@ -27,12 +26,13 @@ Misc:
 	- RandomData: generates random items distributed as a gaussian
 	- WordleTextGenerator: prints a user's data to the console so we can get pretty wordle pictures.
 
-CV stuff???
+CV stuff
+	- Karen's copy and pasted code
 
 
 OBJECTIVE C
-Querying stuff????
+	- Shirmung's stuff
 
 R
 Plotting
-- GuassianPlot: plots a bunch of gaussian distributions, will work on this when we get to the presentation
+- GaussianPlot: plots a bunch of gaussian distributions, will work on this when we get to the presentation
