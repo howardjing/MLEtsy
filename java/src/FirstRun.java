@@ -1,9 +1,15 @@
+import control.Ranker;
+import representation.User;
+import representation.RandomItems;
+
 public class FirstRun {
     public static void main(String[] args) {
-        User testUser = new User("data/training.txt");
-        RandomItems testRandomItems = new RandomItems("data/randomizedTesting.txt");
+        System.out.println("Hello World");
+        User testUser = new User("data/MadeUpTrainingData.txt");
+        RandomItems testRandomItems = new RandomItems("data/MadeUpTestingData.txt");
     
-        Tester test = new Tester(testUser, testRandomItems);
+        Ranker test = new Ranker(testUser, testRandomItems);
+        //Ranker test = new Ranker(testUser, testRandomItems);
         //System.out.println("Dict: " + test.allTagsDict.toString());
         test.printPreferences();
     
