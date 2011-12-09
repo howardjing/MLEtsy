@@ -65,8 +65,13 @@ public class Item {
         }
         */
         
+        // first token is the label
         label = Integer.valueOf(colonTokenizer.nextToken().trim());
+        
+        // second token is the id
         id = Integer.valueOf(colonTokenizer.nextToken().trim());
+		
+        // tokenize the tags
         if (colonTokenizer.hasMoreTokens()) {
             String tagsString = colonTokenizer.nextToken().trim();
             //System.out.println(tagsString);

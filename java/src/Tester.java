@@ -163,11 +163,10 @@ public class Tester {
     }
     
     public static void main(String[] args) {
-        User testUser = new User("data/MadeUpTrainingData.txt");
-        RandomItems testRandomItems = new RandomItems("data/MadeUpTestingData.txt");
-        
+      	User testUser = new User("data/MadeUpTrainingData.txt");
+        RandomItems testRandomItems = new RandomItems("data/MadeUpTestingData.txt"); 
         Tester test = new Tester(testUser, testRandomItems);
-        System.out.println("Dict: " + test.allTagsDict.toString());
+        //System.out.println("Dict: " + test.allTagsDict.toString());
         test.printPreferences();
         
     }
