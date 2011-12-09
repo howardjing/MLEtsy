@@ -51,11 +51,11 @@ public class LabelData {
     }
 
 	public static void main(String args[]) {
-		LabelData userData = new LabelData("data/training"); 
+		LabelData userData = new LabelData("data/userFavoriteItems.txt"); 
 		//data to be labeled as user (1)
 		userData.labelAsUser();
 	
-		LabelData randomData = new LabelData(""); 
+		LabelData randomData = new LabelData("data/randomItems.txt"); 
 		//random data to be labeled (0) *(DO THIS BEFORE YOU SEED THE RANDOMS)
 			randomData.labelAsRandom();
 	
