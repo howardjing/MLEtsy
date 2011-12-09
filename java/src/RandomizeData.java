@@ -18,6 +18,8 @@ public class RandomizeData {
 	
 	public RandomizeData(String filepath){
 		file = filepath;	
+		numLines = this.CountLines();
+		this.Randomize();
 	}
 	
 	public int CountLines(){
@@ -33,7 +35,6 @@ public class RandomizeData {
         }
         catch (IOException e){     
         }
-		numLines = numberOfLines;
 		return numberOfLines;
 	}
 	
@@ -61,7 +62,7 @@ public class RandomizeData {
         }
 
 		try {
-		String path = "data/labeled/Randomized";
+		String path = "data/labeled/Randomized"; //Change path to change directory where randomized file will be written
 		BufferedWriter writer = new BufferedWriter(new FileWriter(path));
 		for (int i = 0; i < numLines ; i++){
 			int temp = numbers.get(i);
@@ -77,8 +78,6 @@ public class RandomizeData {
 	
 	public static void main(String args[]) {
 		RandomizeData data = new RandomizeData("data/labeled/userFavoriteItemsLabeled");
-		int numberOfLines = data.CountLines();
-		data.Randomize();
 		
 	}
 	
