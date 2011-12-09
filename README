@@ -1,1 +1,29 @@
 recommending items to Etsy user
+
+DESCRIPTION OF WHAT WE HAVE SO FAR, I DONT KNOW WHAT YOU GUYS HAVE DONE SO PLEASE WRITE A SHORT DESCRIPTION
+WE REALLY HAVE TO ORGANIZE THE WAY OUR JAVA FILES ARE SET UP BTW ITS KIND OF GROSS
+
+JAVA
+THE MOST IMPORTANT ONE:
+- Tester: the main class for finding preferences, should probably be renamed to something more descriptive
+
+For storing Etsy data:
+- User: a collection of items favorited by a user
+- RandomItems: a collection of random items
+- Item: a collection of tags that describe an Etsy item
+- Items: the superclass of User and RandomItems, an abstract class
+
+Misc:
+- Helper: contains static functions that handle the math computation stuff
+- RandomData: generates random items distributed as a gaussian
+- WordleTextGenerator: prints a user's data to the console so we can get pretty wordle pictures.
+
+CV stuff???
+
+
+OBJECTIVE C
+Querying stuff????
+
+R
+Plotting
+- GuassianPlot: plots a bunch of gaussian distributions, will work on this when we get to the presentation

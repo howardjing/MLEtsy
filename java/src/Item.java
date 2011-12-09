@@ -11,6 +11,7 @@ public class Item {
     public double similarityScore;
     public double preferenceScore;
     public HashMap<Item, Integer> closestItems;
+    public int label; // 0 for random, 1 for favorite
     
     public Item() {
         id = 0;
@@ -19,6 +20,7 @@ public class Item {
         similarityScore = 0;
         preferenceScore = 0;
         closestItems = new HashMap<Item, Integer>();
+        label = -1;
     }
     
     public Item(String data) {
@@ -30,20 +32,34 @@ public class Item {
         // break up categories
         StringTokenizer colonTokenizer = new StringTokenizer(data, ":");
         
-        // first token is id
-        id = Integer.valueOf(colonTokenizer.nextToken());
-        
-        // tokenize the tags
-        if (colonTokenizer.hasMoreTokens()) {
-            String tagsString = colonTokenizer.nextToken();
-            //System.out.println(tagsString);
-            StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
-            while (commaTokenizer.hasMoreTokens()) {
-            
-                String tag = commaTokenizer.nextToken();
-                this.tags.add(tag);
-        
+        int counter = 1;
+        while (colonTokenizer.hasMoreTokens()) {
+            // first token is label
+            if (counter == 1) {
+                String labelString = colonTokenizer.nextToken().trim();
+                label = Integer.valueOf(labelString);
             }
+        
+            // second token is id
+            if (counter == 2) {
+                String idString = colonTokenizer.nextToken();
+                id = Integer.valueOf(idString.trim());
+            }
+        
+            // third token is tags
+            if (counter == 3) {
+                String tagsString = colonTokenizer.nextToken().trim();
+                //System.out.println(tagsString);
+                StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
+                while (commaTokenizer.hasMoreTokens()) {
+                    String tag = commaTokenizer.nextToken().trim();
+                    this.tags.add(tag);
+                }
+            }
+            if (counter > 3) {
+                System.out.println("SOMETHING WENT WRONG, SHOULD ONLY HAVE 3 COLONS WHAT");
+            }
+            counter = counter + 1;
         }
     }
     

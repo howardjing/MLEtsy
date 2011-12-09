@@ -12,7 +12,10 @@ public class Helper {
         return (numerator/denominator);
     }
     
-    // returns dot product with sparse vectors
+    // ~~~~~WARNING~~~~~
+    // SINCE OUR VECTORS ARE SPARSE AND ALL NON ZERO VALUES ARE 1, 
+    // I'M ONLY RECORDING THE POSITION OF THE ONES, AND COMPUTING DOT PRODUCT ACCORDINGLY
+    // THIS FUNCTION WILL NOT WORK ON NORMAL VECTORS!!!!!!
     public static double dotProduct (ArrayList<Integer> a, ArrayList<Integer> b) {
         double product = 0;
         for (int i=0; i<a.size(); i++) {
@@ -24,6 +27,7 @@ public class Helper {
     }
     
     // returns the l2 norm of our sparse vector
+    // see above function for warning
     public static double l2Norm(ArrayList<Integer> a) {
         return Math.sqrt(a.size());
     }
