@@ -310,7 +310,7 @@
 
 - (void)setUpChosenUsersData
 {
-    // get 100 chosen users chosen by our user's top 10 favorites
+    // get 100 users chosen by our user's top 10 favorite categories
     // ? users that have favorited ? items
 
     // ? users that have favorited ? items
