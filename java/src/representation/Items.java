@@ -19,12 +19,12 @@ public abstract class Items {
     // keeps track of the count of every tag
     public HashMap<String, Integer> tagDict;
     // makes sure there are no duplicates
-    public HashMap<Integer, Integer> idDict;
+    public HashMap<Integer, Item> idDict;
     
     public Items() {
         items = new ArrayList<Item>();
         tagDict = new HashMap<String, Integer>();
-        idDict = new HashMap<Integer, Integer>();
+        idDict = new HashMap<Integer, Item>();
     }
 
     // method takes the name of a text file formated as Label: ItemID:tag,tag,tag...
@@ -41,7 +41,7 @@ public abstract class Items {
                 // put this item in the arrayList if it has not been parsed yet
                 if (!idDict.containsKey(tempItem.id)) {
 
-                    idDict.put(tempItem.id, tempItem.id);
+                    idDict.put(tempItem.id, tempItem);
                     items.add(tempItem);  
 
                     // get tag counts from the item

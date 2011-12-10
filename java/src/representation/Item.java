@@ -13,8 +13,10 @@ public class Item {
     public ArrayList<Integer> tagsID;
     public double similarityScore;
     public double preferenceScore;
-    public HashMap<Item, Integer> closestItems;
-    public HashMap<Item, Double> similarityDict;
+    // random item's id, with rank
+    public HashMap<Integer, Integer> closestItems;
+    // random item's id, with similarity score
+    public HashMap<Integer, Double> similarityDict;
     
     
     public Item() {
@@ -23,9 +25,9 @@ public class Item {
         tags = new ArrayList<String>();
         tagsID = new ArrayList<Integer>();
         similarityScore = 0;
-        similarityDict = new HashMap<Item, Double>();
+        similarityDict = new HashMap<Integer, Double>();
         preferenceScore = 0;
-        closestItems = new HashMap<Item, Integer>(6000);
+        closestItems = new HashMap<Integer, Integer>(6000);
     }
     
     public Item(String data) {
@@ -135,7 +137,7 @@ public class Item {
         this.id = id;
     }
     
-    public HashMap<Item, Integer> getClosestItems() {
+    public HashMap<Integer, Integer> getClosestItems() {
         return closestItems;
     }
     

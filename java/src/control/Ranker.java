@@ -18,7 +18,6 @@ public class Ranker {
     // This assigns each tag value a unique integer
     public HashMap<String, Integer> allTagsDict;
 
-    public HashMap<Item, Double> itemsSimilarityScore;
     public int n; // number of nearest neighbors
     
     // The found preferences
@@ -33,7 +32,6 @@ public class Ranker {
 
         allTagsDict = new HashMap<String, Integer>();
         
-        itemsSimilarityScore = new HashMap<Item, Double>();
         n = 20;
         
         preferences = new ArrayList<Item>();
@@ -84,7 +82,7 @@ public class Ranker {
         // compare randomItems to this item
         for (Item random : randomItems) {
             random.similarityScore = Helper.similarity(userItem.getTagsID(), random.getTagsID());
-            userItem.similarityDict.put(random, random.similarityScore);
+            userItem.similarityDict.put(random.id, random.similarityScore);
         }
         
         // sort randomItems by similarityScore from greatest to least
@@ -106,16 +104,15 @@ public class Ranker {
         Collections.sort(randomItems, similarityComparator);
         
         // updated userItem's closestItems hashmap
-        HashMap<Item, Integer> similarityDict = userItem.getClosestItems();
         for (int i=0; i<randomItems.size(); i++) {
-            userItem.closestItems.put(randomItems.get(i), (i+1));
+            userItem.closestItems.put(randomItems.get(i).id, (i+1));
         }
     }
     
     public void rankUserItemsComparedToRandom(Item randomItem, ArrayList<Item> userItems) {
         for (Item userItem : userItems) {
-            if (userItem.closestItems.containsKey(randomItem)) {
-                randomItem.closestItems.put(userItem, userItem.closestItems.get(randomItem));
+            if (userItem.closestItems.containsKey(randomItem.id)) {
+                randomItem.closestItems.put(userItem.id, userItem.closestItems.get(randomItem.id));
             }
             else {
                 System.out.println("UH OH COULD NOT FIND CLOSEST ITEMS");
@@ -126,10 +123,12 @@ public class Ranker {
     // returns a summation of the absolute value of the correlation for a random item
     public void computePreferenceScore(Item randomItem) {
         double temp = 0;
-        for (Item userItem : randomItem.closestItems.keySet()) {
+        for (int userItemID : randomItem.closestItems.keySet()) {
             // only sum if the two items are nth nearest neighbors
-            if (randomItem.closestItems.get(userItem) <= n) {
-                temp = temp + Math.abs(userItem.similarityDict.get(randomItem));
+            if (randomItem.closestItems.get(userItemID) <= n) {
+                Item userItem = user.idDict.get(userItemID);
+                //System.out.println("User: " + userItem);
+                temp = temp + Math.abs(userItem.similarityDict.get(randomItem.id));
             }
         }
         randomItem.preferenceScore = temp;
