@@ -80,7 +80,15 @@ public class Item {
             //System.out.println(tagsString);
             StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
             while (commaTokenizer.hasMoreTokens()) {
-                String tag = commaTokenizer.nextToken().trim().toLowerCase();
+                // split out underscores
+                String unprocessed = commaTokenizer.nextToken().toLowerCase();
+                String[] noUnderScores = unprocessed.split("_");
+                String tag = "";
+                for (int i=0; i<noUnderScores.length; i++) {
+                    tag = tag + noUnderScores[i] + " ";
+                }
+                // other processing
+                tag = tag.trim().toLowerCase();
                 this.tags.add(tag);
             }
         }
