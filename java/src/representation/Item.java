@@ -80,7 +80,7 @@ public class Item {
             //System.out.println(tagsString);
             StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
             while (commaTokenizer.hasMoreTokens()) {
-                String tag = commaTokenizer.nextToken().trim();
+                String tag = commaTokenizer.nextToken().trim().toLowerCase();
                 this.tags.add(tag);
             }
         }

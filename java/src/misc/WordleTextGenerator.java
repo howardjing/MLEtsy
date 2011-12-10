@@ -17,6 +17,7 @@ public class WordleTextGenerator {
         HashMap<String, Integer> dictionary = user.getTagDict();
         for (String tag : dictionary.keySet()) {
             String filtered = tag.toLowerCase();
+            //String filtered = tag;
             for (int i=0; i<dictionary.get(tag); i++) {
                 System.out.print(filtered + " ");
             }

@@ -14,8 +14,11 @@ import java.util.Map;
 // Items are a list of items
 public abstract class Items {    
 
+    // the collection of items
     public ArrayList<Item> items;
+    // keeps track of the count of every tag
     public HashMap<String, Integer> tagDict;
+    // makes sure there are no duplicates
     public HashMap<Integer, Integer> idDict;
     
     public Items() {
