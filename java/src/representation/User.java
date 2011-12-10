@@ -21,18 +21,5 @@ public class User extends Items{
         this();
         this.items = items;
         this.process(tags);
-    }
-
-    // ===== MAIN METHOD SHOULD REMOVE LATER =======
-
-    // parse through data, record 
-    public static void main(String args[]) {
-        User me = new User("data/userFavoriteItems.txt");
-        //me.sort();
-        System.out.println("User: " + me);
-        System.out.println("Num Items: " + me.items.size());
-        // UNCOMMENT TO PRINT OUT STUFF FOR WORDLE:
-        //WordleTextGenerator wordle = new WordleTextGenerator(me);
-        //wordle.printWords();
-    }   
+    }  
 }
