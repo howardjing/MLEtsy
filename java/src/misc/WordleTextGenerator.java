@@ -1,5 +1,6 @@
 package misc;
 
+import representation.User;
 import java.util.HashMap;
 
 public class WordleTextGenerator {
