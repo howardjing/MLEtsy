@@ -1,4 +1,0 @@
-1 : 123 : apple , banana , orange , cucumber ,
-1: 234: apple, blue, pink, orange, cucumber,
-1: 345: banana, cucumber, pink, toothpaste, flowers,
-1: 456: apple, blue, blueberry, pink, orange, flower, toothpaste

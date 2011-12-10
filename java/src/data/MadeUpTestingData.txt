@@ -1,5 +1,0 @@
-1: 111: bluberry , blue, pink, flowers, apple,
-0: 112: baseball, football, hockey, iPhone,
-0: 113: foo, int, char, car, banana
-0: 114: cucumber, flamingo, blue, blueberry
-1: 115: apple, banana, orange, cucumber,
