@@ -23,6 +23,9 @@ public class Ranker {
     
     // The found preferences
     public ArrayList<Item> preferences;
+    public int numWrong;
+    public int numUserItems;
+    public int numTotal;
     
     public Ranker() {
         user = new User();
@@ -34,6 +37,9 @@ public class Ranker {
         n = 20;
         
         preferences = new ArrayList<Item>();
+        numWrong = 0;
+        numUserItems = 0;
+        numTotal = 0;
     }
     
     public Ranker(User user, RandomItems randomItems) {
@@ -41,6 +47,8 @@ public class Ranker {
         
         this.user = user;
         this.randomItems = randomItems;
+        
+        this.numTotal = randomItems.getItems().size();
         
         // prepare dictionary, update all items appropriately
         this.allTagsDict = this.prepareAllTagsDict();
@@ -52,6 +60,7 @@ public class Ranker {
         }
         
         this.findPreferences();
+        this.findNumWrong();
     }
     
     public HashMap<String,Integer> prepareAllTagsDict() {
@@ -77,7 +86,6 @@ public class Ranker {
             random.similarityScore = Helper.similarity(userItem.getTagsID(), random.getTagsID());
         }
         
-        // TDL: maybe make this its own class??
         // sort randomItems by similarityScore from greatest to least
         // I think this gives an xlint warning for some reason
         Comparator<Item> similarityComparator = new Comparator<Item>() {
@@ -144,7 +152,6 @@ public class Ranker {
         
         // sort randomItems by preference from greatest to least
         // I think this gives an xlint warning for some reason
-        // TDL: MAKE THIS ITS OWN CLASS???
         Comparator<Item> preferenceComparator = new Comparator<Item>() {
             // compares by similarity score
             public int compare(Item a, Item b) {
@@ -162,6 +169,34 @@ public class Ranker {
         Collections.sort(randomItems.items, preferenceComparator);
         preferences = (ArrayList<Item>)randomItems.items.clone();
         
+    }
+    
+    // finds the number of user favorites ranked in the top
+    public void findNumWrong() {
+        numWrong = 0;
+        numUserItems = 0;
+        // find the total number of user items in random items
+        for (int i=0; i<numTotal; i++) {
+            if (preferences.get(i).getLabel() == 1) {
+                numUserItems = numUserItems + 1;
+            }
+        }
+        
+        // find the number of user items that are not ranked in the top
+        for (int i=numUserItems; i<numTotal; i++) {
+            if (preferences.get(i).getLabel() != 1) {
+                numWrong = numWrong + 1;
+            }
+        }
+    }
+    
+    // buggy
+    public void printError() {
+        System.out.println("Total items: " + numTotal);
+        System.out.println("Total user items: " + numUserItems);
+        System.out.println("User items wrong: " + numWrong);
+        System.out.println("User items right: " + (numUserItems - numWrong));
+        System.out.println("Percent accuracy: " + (numUserItems - numWrong)/numUserItems);
     }
     
     public void printPreferences() {

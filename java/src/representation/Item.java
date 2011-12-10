@@ -7,22 +7,23 @@ import java.util.HashMap;
 // items have ids and tags
 public class Item {
     
+    public int label; // 0 for random, 1 for favorite
     public int id;
     public ArrayList<String> tags;
     public ArrayList<Integer> tagsID;
     public double similarityScore;
     public double preferenceScore;
     public HashMap<Item, Integer> closestItems;
-    public int label; // 0 for random, 1 for favorite
+    
     
     public Item() {
+        label = -1;
         id = 0;
         tags = new ArrayList<String>();
         tagsID = new ArrayList<Integer>();
         similarityScore = 0;
         preferenceScore = 0;
         closestItems = new HashMap<Item, Integer>(8000);
-        label = -1;
     }
     
     public Item(String data) {
@@ -126,5 +127,9 @@ public class Item {
     
     public HashMap<Item, Integer> getClosestItems() {
         return closestItems;
+    }
+    
+    public int getLabel() {
+        return label;
     }
 }

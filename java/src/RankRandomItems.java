@@ -16,6 +16,8 @@ public class RankRandomItems {
             User testUser = new User(userItemsPath);
             RandomItems testRandomItems = new RandomItems(randomItemsPath);
             Ranker test = new Ranker(testUser, testRandomItems);
+            // this is buggy
+            //test.printError();
             System.out.println("label,id");
             test.printPreferences();
         }
