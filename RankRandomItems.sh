@@ -11,5 +11,6 @@ javac -sourcepath java/src -d java/classes java/src/RankRandomItems.java
 # java -Xmx2048m -classpath java/classes RankRandomItems ${userItemsPath} ${randomItemsPath} > ${outputResultsPath}
 
 for i in {0..9}; do
-    java -Xmx2048m -classpath java/classes RankRandomItems data/trainingnot${i}.txt data/test${i}.txt > output/results${i}.txt
+    echo "processing ${i}..."
+    java -Xmx3072m -classpath java/classes RankRandomItems data/trainingnot${i}.txt data/test${i}.txt > output/results${i}.txt
 done

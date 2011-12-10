@@ -14,6 +14,7 @@ public class Item {
     public double similarityScore;
     public double preferenceScore;
     public HashMap<Item, Integer> closestItems;
+    public HashMap<Item, Double> similarityDict;
     
     
     public Item() {
@@ -22,8 +23,9 @@ public class Item {
         tags = new ArrayList<String>();
         tagsID = new ArrayList<Integer>();
         similarityScore = 0;
+        similarityDict = new HashMap<Item, Double>();
         preferenceScore = 0;
-        closestItems = new HashMap<Item, Integer>(8000);
+        closestItems = new HashMap<Item, Integer>(6000);
     }
     
     public Item(String data) {

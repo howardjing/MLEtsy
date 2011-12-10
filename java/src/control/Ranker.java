@@ -84,6 +84,7 @@ public class Ranker {
         // compare randomItems to this item
         for (Item random : randomItems) {
             random.similarityScore = Helper.similarity(userItem.getTagsID(), random.getTagsID());
+            userItem.similarityDict.put(random, random.similarityScore);
         }
         
         // sort randomItems by similarityScore from greatest to least
@@ -126,8 +127,9 @@ public class Ranker {
     public void computePreferenceScore(Item randomItem) {
         double temp = 0;
         for (Item userItem : randomItem.closestItems.keySet()) {
+            // only sum if the two items are nth nearest neighbors
             if (randomItem.closestItems.get(userItem) <= n) {
-                temp = temp + Math.abs(userItem.getSimilarityScore());
+                temp = temp + Math.abs(userItem.similarityDict.get(randomItem));
             }
         }
         randomItem.preferenceScore = temp;
