@@ -348,7 +348,9 @@
         }
         
         // dictionary of array holding dictionaries
-        [randomUsersFavs setObject:chosenUserFavs forKey:chosenUserID];
+        [chosenUsersFavs setObject:chosenUserFavs forKey:chosenUserID];
+        
+        NSLog(@"%lu", [chosenUsersFavs count]);
         
         [chosenUserFavs release];
     }
