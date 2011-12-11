@@ -27,12 +27,17 @@ public class Item {
         similarityScore = 0;
         similarityDict = new HashMap<Integer, Double>();
         preferenceScore = 0;
-        closestItems = new HashMap<Integer, Integer>(6000);
+        closestItems = new HashMap<Integer, Integer>();
     }
     
     public Item(String data) {
         this();
         this.process(data);
+    }
+    
+    public Item(String[] data, String unlabelled) {
+        this();
+        this.process(data, unlabelled);
     }
     
     public void process(String data) {
@@ -81,6 +86,31 @@ public class Item {
         // tokenize the tags
         if (colonTokenizer.hasMoreTokens()) {
             String tagsString = colonTokenizer.nextToken().trim();
+            //System.out.println(tagsString);
+            StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
+            while (commaTokenizer.hasMoreTokens()) {
+                // split out underscores
+                String unprocessed = commaTokenizer.nextToken().toLowerCase();
+                String[] noUnderScores = unprocessed.split("_");
+                String tag = "";
+                for (int i=0; i<noUnderScores.length; i++) {
+                    tag = tag + noUnderScores[i] + " ";
+                }
+                // other processing
+                tag = tag.trim().toLowerCase();
+                this.tags.add(tag);
+            }
+        }
+    }
+    
+    public void process(String[] data, String unlabelled) {
+
+        // first token is the id
+        id = Integer.valueOf(data[0].trim());
+		
+        // tokenize the tags
+        if ( data.length > 1) {
+            String tagsString = data[1].trim();
             //System.out.println(tagsString);
             StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
             while (commaTokenizer.hasMoreTokens()) {
