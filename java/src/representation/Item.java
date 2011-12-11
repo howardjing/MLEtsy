@@ -35,9 +35,9 @@ public class Item {
         this.process(data);
     }
     
-    public Item(String[] data, String unlabelled) {
+    public Item(String[] data, boolean labelled) {
         this();
-        this.process(data, unlabelled);
+        this.process(data, labelled);
     }
     
     public void process(String data) {
@@ -103,14 +103,22 @@ public class Item {
         }
     }
     
-    public void process(String[] data, String unlabelled) {
+    public void process(String[] data, boolean labelled) {
 
-        // first token is the id
-        id = Integer.valueOf(data[0].trim());
+        if (!labelled) {
+            // first token is the id
+            id = Integer.valueOf(data[0].trim());
+        }
+        if (labelled) {
+            // first token is the label
+            label = Integer.valueOf(data[0].trim());
+            //second token is id
+            id = Integer.valueOf(data[1].trim());
+        }
 		
         // tokenize the tags
-        if ( data.length > 1) {
-            String tagsString = data[1].trim();
+        if ( (data.length > 1 && !labelled) || (data.length > 2 && labelled) ) {
+            String tagsString = data[data.length-1].trim();
             //System.out.println(tagsString);
             StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
             while (commaTokenizer.hasMoreTokens()) {

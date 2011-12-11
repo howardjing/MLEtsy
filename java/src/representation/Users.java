@@ -12,9 +12,9 @@ public class Users {
     
     public ArrayList<User> users;
     
-    public Users(String filePath) {
+    public Users(String filePath, boolean label) {
         users = new ArrayList<User>();
-        this.process(filePath);
+        this.process(filePath,label);
     }
     
     // method takes the name of a text file formated as 
@@ -23,7 +23,7 @@ public class Users {
     // Label:ItemID:tag,tag,tag...
     // USER:34234:
     // Lbael:ItemID:tag,tag,tag,...
-    public void process(String filePath) {
+    public void process(String filePath, boolean label) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));    
 
@@ -44,7 +44,7 @@ public class Users {
                 }
                 // otherwise it's a new Item
                 else {
-                    Item tempItem = new Item(tempArray, "unlabelled");
+                    Item tempItem = new Item(tempArray, label);
                     // put this item in the arrayList if it has not been parsed yet
                     if (!tempUser.idDict.containsKey(tempItem.id)) {
 
