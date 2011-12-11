@@ -52,8 +52,8 @@ public class LineDemo2D extends JApplet {
         else {
             g2.setPaint(Color.green);
         }
-        int y = i%800;
-        int x = i/800;
+        int y = i%700;
+        int x = i/700;
         g2.draw(new Line2D.Double(300*x, y, 300*x + 300, y));
     }
 
@@ -68,7 +68,7 @@ public class LineDemo2D extends JApplet {
         System.exit(0);
       }
     });
-    DrawError error = new DrawError("output/4fold/results12");
+    DrawError error = new DrawError("output/4fold/results42");
     JApplet applet = new LineDemo2D(error);
     f.getContentPane().add("Center", applet);
     applet.init();

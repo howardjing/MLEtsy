@@ -14,12 +14,12 @@ public class RankFrequency {
             String userItemsPath = args[0];
             String randomItemsPath = args[1];
             User testUser = new User(userItemsPath);
-            RandomItems testRandomItems = new RandomItems(randomItemsPath);
+            User testRandomItems = new User(randomItemsPath);
             Frequency test = new Frequency(testUser, testRandomItems);
             // this is buggy
             //test.printError();
-            //System.out.println("label,id");
-            //test.printPreferences();
+            System.out.println("label,id");
+            test.printPreferences();
         }
         else {
             System.out.println("usage: java -Xmx2048m -classpath [path to classes] RankRandomItems [path to user's items] [path to random items]");

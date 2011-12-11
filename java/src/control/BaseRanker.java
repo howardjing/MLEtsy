@@ -3,20 +3,22 @@ package control;
 import representation.User;
 import representation.RandomItems;
 import representation.Item;
+
 import java.util.ArrayList;
+import java.lang.Math;
 
 public abstract class BaseRanker {
     
     // Instance variables
     public User user;
-    public RandomItems randomItems;
+    public User randomUser;
 
     // The found preferences
     public ArrayList<Item> preferences;
     
-    public BaseRanker {
+    public BaseRanker() {
         user = new User();
-        randomItems = new RandomItems();
+        randomUser = new User();
         preferences = new ArrayList<Item>();
     }
     

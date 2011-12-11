@@ -22,18 +22,18 @@ public class Ranker extends BaseRanker{
         allTagsDict = new HashMap<String, Integer>();
     }
     
-    public Ranker(User user, RandomItems randomItems) {
+    public Ranker(User user, User randomUser) {
         this();
-        
+
         this.user = user;
-        this.randomItems = randomItems;
+        this.randomUser = randomUser;
         
         // prepare dictionary, update all items appropriately
         this.allTagsDict = this.prepareAllTagsDict();
         for (Item item : user.items) {
             item.setTagsID(allTagsDict);
         }
-        for (Item item : randomItems.items) {
+        for (Item item : randomUser.items) {
             item.setTagsID(allTagsDict);
         }
         
@@ -47,7 +47,7 @@ public class Ranker extends BaseRanker{
             temp.put(key, (temp.size() + 1));
         }
         
-        for (String key : this.randomItems.tagDict.keySet()) {
+        for (String key : this.randomUser.tagDict.keySet()) {
             if (!temp.containsKey(key)) {
                 temp.put(key, (temp.size() + 1));
             }
@@ -121,11 +121,11 @@ public class Ranker extends BaseRanker{
     public void findPreferences() {
         // for each user's item, find closest random items
         for (Item userItem : user.getItems()) {
-            rankRandomItemsToComparedToUser(userItem, randomItems.getItems());
+            rankRandomItemsToComparedToUser(userItem, randomUser.getItems());
         }
         
         // for each random item, calculate preference score
-        for (Item randomItem : randomItems.getItems()) {
+        for (Item randomItem : randomUser.getItems()) {
             rankUserItemsComparedToRandom(randomItem, user.getItems());
             computePreferenceScore(randomItem);
         }
@@ -146,8 +146,8 @@ public class Ranker extends BaseRanker{
         };
         
         // sort the randomItems by randomitems's preference score
-        Collections.sort(randomItems.items, preferenceComparator);
-        preferences = (ArrayList<Item>)randomItems.items.clone();
+        Collections.sort(randomUser.items, preferenceComparator);
+        preferences = (ArrayList<Item>)randomUser.items.clone();
         
     }
     
