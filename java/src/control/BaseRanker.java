@@ -1,3 +1,10 @@
+package control;
+
+import representation.User;
+import representation.RandomItems;
+import representation.Item;
+import java.util.ArrayList;
+
 public abstract class BaseRanker {
     
     // Instance variables
