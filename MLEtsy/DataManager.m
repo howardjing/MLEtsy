@@ -8,8 +8,9 @@
 //  NOTE: UNFORTUNATELY THIS COULD BE WRITTEN MORE OOP-LY :(
 
 #import "DataManager.h"
-#import "SBJson.h"
+#import "ChosenUsersData.h"
 #import "Key.h"
+#import "SBJson.h"
 #include <stdlib.h>
 
 @implementation DataManager
@@ -19,7 +20,7 @@
 @synthesize ourUserFavs;
 @synthesize randomListings;
 @synthesize randomUsersIDs, randomUsersFavs;
-@synthesize chosenUsersIDs, chosenUsersFavs;
+@synthesize chosenUsers, chosenUsersFavs;
 
 - (id)init
 {
@@ -45,14 +46,14 @@
         randomUsersIDs = [[NSMutableArray alloc] init];
         randomUsersFavs = [[NSMutableDictionary alloc] init];
         
-        [self setUpRandomUsersData];
-        [self printData:randomUsersFavs];
+        //[self setUpRandomUsersData];
+        //[self printData:randomUsersFavs];
     
-        chosenUsersIDs = [[NSMutableArray alloc] init];
+        chosenUsers = [[ChosenUsersData alloc] init];
         chosenUsersFavs = [[NSMutableDictionary alloc] init];
         
-        //[self setUpChosenUsersData];
-        //[self printData:chosenUsersFavs];
+        [self setUpChosenUsersData];
+        [self printData:chosenUsersFavs];
     }
     
     return self;
@@ -71,7 +72,7 @@
     [randomUsersIDs release];
     [randomUsersFavs release];
     
-    [chosenUsersIDs release];
+    [chosenUsers release];
     [chosenUsersFavs release];
     
     [super dealloc];
@@ -310,29 +311,7 @@
 
 - (void)setUpChosenUsersData
 {
-    // get 100 users chosen by our user's top 10 favorite categories
-    // ? users that have favorited ? items
-
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // ? users that have favorited ? items
-    
-    // 
-    for (NSString *chosenUserID in chosenUsersIDs) 
+    for (NSString *chosenUserID in chosenUsers.chosenUserIDs) 
     {
         NSMutableDictionary *chosenUserFavs = [[NSMutableDictionary alloc] init];
         

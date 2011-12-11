@@ -24,6 +24,7 @@
 		C1396782148AAAFA00FE9796 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = C1396775148AAAFA00FE9796 /* SBJsonUTF8Stream.m */; };
 		C1396783148AAAFA00FE9796 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C1396777148AAAFA00FE9796 /* SBJsonWriter.m */; };
 		C1396791148AB34F00FE9796 /* Key.m in Sources */ = {isa = PBXBuildFile; fileRef = C1396790148AB34F00FE9796 /* Key.m */; };
+		C16350C214948FFA00A85357 /* ChosenUsersData.m in Sources */ = {isa = PBXBuildFile; fileRef = C16350C114948FFA00A85357 /* ChosenUsersData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +76,8 @@
 		C1396777148AAAFA00FE9796 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		C139678F148AB34F00FE9796 /* Key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		C1396790148AB34F00FE9796 /* Key.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Key.m; sourceTree = "<group>"; };
+		C16350C014948FFA00A85357 /* ChosenUsersData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChosenUsersData.h; sourceTree = "<group>"; };
+		C16350C114948FFA00A85357 /* ChosenUsersData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChosenUsersData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				46D3CC4D148AA36E003B4838 /* main.m */,
 				C128CF02148E7F86005F19ED /* DataManager.h */,
 				C128CF03148E7F86005F19ED /* DataManager.m */,
+				C16350C014948FFA00A85357 /* ChosenUsersData.h */,
+				C16350C114948FFA00A85357 /* ChosenUsersData.m */,
 				C139678F148AB34F00FE9796 /* Key.h */,
 				C1396790148AB34F00FE9796 /* Key.m */,
 				46D3CC51148AA36E003B4838 /* MLEtsy.1 */,
@@ -232,6 +237,7 @@
 				C1396783148AAAFA00FE9796 /* SBJsonWriter.m in Sources */,
 				C1396791148AB34F00FE9796 /* Key.m in Sources */,
 				C128CF04148E7F86005F19ED /* DataManager.m in Sources */,
+				C16350C214948FFA00A85357 /* ChosenUsersData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

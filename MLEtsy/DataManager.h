@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class Key;
+@class ChosenUsersData;
 
 @interface DataManager : NSObject
 {
@@ -23,7 +24,7 @@
     NSMutableArray *randomUsersIDs;
     NSMutableDictionary *randomUsersFavs;
     
-    NSMutableArray *chosenUsersIDs;
+    ChosenUsersData *chosenUsers;
     NSMutableDictionary *chosenUsersFavs;
 }
 
@@ -38,7 +39,7 @@
 @property (nonatomic, retain) NSMutableArray *randomUsersIDs;
 @property (nonatomic, retain) NSMutableDictionary *randomUsersFavs;
 
-@property (nonatomic, retain) NSMutableArray *chosenUsersIDs;
+@property (nonatomic, retain) ChosenUsersData *chosenUsers;
 @property (nonatomic, retain) NSMutableDictionary *chosenUsersFavs;
 
 - (int)obtainRandomNumber:(int)length;
