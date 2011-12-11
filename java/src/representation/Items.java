@@ -20,6 +20,7 @@ public abstract class Items {
     public HashMap<String, Integer> tagDict;
     // makes sure there are no duplicates
     public HashMap<Integer, Item> idDict;
+	public int tagSum = 0;
     
     public Items() {
         items = new ArrayList<Item>();
@@ -46,6 +47,7 @@ public abstract class Items {
 
                     // get tag counts from the item
                     for (String tag : tempItem.getTags()) {
+						tagSum++;
                         int count = 1;
                         if (tagDict.containsKey(tag)) {
                             count = count + tagDict.get(tag);
@@ -101,6 +103,10 @@ public abstract class Items {
     // ===== GETTERS AND SETTERS ======
     public ArrayList<Item> getItems() {
         return items;
+    }
+
+	public int getSum() {
+        return tagSum;
     }
  
     public HashMap<String, Integer> getTagDict() {
