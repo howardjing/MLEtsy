@@ -16,6 +16,11 @@ public class User extends Items{
         this();
         this.process(filePath);
     }
+    
+    public User(int id) {
+        this();
+        this.id = id;
+    }
  
     public User(ArrayList<Item> items, ArrayList<String> tags) {
         this();
