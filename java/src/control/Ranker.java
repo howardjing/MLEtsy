@@ -9,35 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Ranker {
+public class Ranker extends BaseRanker{
     
-    // Instance variables
-    public User user;
-    public RandomItems randomItems;
-
-    // This assigns each tag value a unique integer
-    public HashMap<String, Integer> allTagsDict;
-
     public int n; // number of nearest neighbors
     
-    // The found preferences
-    public ArrayList<Item> preferences;
-    public int numWrong;
-    public int numUserItems;
-    public int numTotal;
+    // This assigns each tag value a unique integer
+    public HashMap<String, Integer> allTagsDict;
     
     public Ranker() {
-        user = new User();
-        randomItems = new RandomItems();
-
-        allTagsDict = new HashMap<String, Integer>();
-        
+        super();
         n = 20;
-        
-        preferences = new ArrayList<Item>();
-        numWrong = 0;
-        numUserItems = 0;
-        numTotal = 0;
+        allTagsDict = new HashMap<String, Integer>();
     }
     
     public Ranker(User user, RandomItems randomItems) {
@@ -45,8 +27,6 @@ public class Ranker {
         
         this.user = user;
         this.randomItems = randomItems;
-        
-        this.numTotal = randomItems.getItems().size();
         
         // prepare dictionary, update all items appropriately
         this.allTagsDict = this.prepareAllTagsDict();
@@ -58,7 +38,6 @@ public class Ranker {
         }
         
         this.findPreferences();
-        this.findNumWrong();
     }
     
     public HashMap<String,Integer> prepareAllTagsDict() {
@@ -170,40 +149,6 @@ public class Ranker {
         Collections.sort(randomItems.items, preferenceComparator);
         preferences = (ArrayList<Item>)randomItems.items.clone();
         
-    }
-    
-    // finds the number of user favorites ranked in the top
-    public void findNumWrong() {
-        numWrong = 0;
-        numUserItems = 0;
-        // find the total number of user items in random items
-        for (int i=0; i<numTotal; i++) {
-            if (preferences.get(i).getLabel() == 1) {
-                numUserItems = numUserItems + 1;
-            }
-        }
-        
-        // find the number of user items that are not ranked in the top
-        for (int i=numUserItems; i<numTotal; i++) {
-            if (preferences.get(i).getLabel() != 1) {
-                numWrong = numWrong + 1;
-            }
-        }
-    }
-    
-    // buggy
-    public void printError() {
-        System.out.println("Total items: " + numTotal);
-        System.out.println("Total user items: " + numUserItems);
-        System.out.println("User items wrong: " + numWrong);
-        System.out.println("User items right: " + (numUserItems - numWrong));
-        System.out.println("Percent accuracy: " + (numUserItems - numWrong)/numUserItems);
-    }
-    
-    public void printPreferences() {
-        for (Item sortedItem : preferences) {
-            System.out.println(sortedItem);
-        }
     }
     
 }
