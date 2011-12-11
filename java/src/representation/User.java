@@ -6,10 +6,14 @@ import java.util.ArrayList;
 public class User extends Items{    
 
     public int id;
+    
+    // how close this user is to other users
+    public double preferenceScore;
  
     public User() {
         super();
         id = 0;
+        preferenceScore = 0;
     }
 
     public User(String filePath) {
@@ -26,5 +30,16 @@ public class User extends Items{
         this();
         this.items = items;
         this.process(tags);
-    }  
+    }
+    
+    public void findPreferenceScore() {
+        for (Item item : items) {
+            preferenceScore = preferenceScore + item.getPreferenceScore();
+        }
+    }
+    
+    // ==== GETTERS AND SETTERS ====
+    public double getPreferenceScore() {
+        return preferenceScore;
+    }
 }
