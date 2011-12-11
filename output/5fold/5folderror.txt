@@ -1,0 +1,646 @@
+> error12
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 558
+
+$correct
+[1] 305
+
+> error12.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 565
+
+$correct
+[1] 298
+
+> error13
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 557
+
+$correct
+[1] 306
+
+> error13.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 568
+
+$correct
+[1] 295
+
+> error14.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 592
+
+$correct
+[1] 271
+
+> error14
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 558
+
+$correct
+[1] 305
+
+> error15
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 557
+
+$correct
+[1] 307
+
+> error15.alt
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 561
+
+$correct
+[1] 303
+
+> error21.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 617
+
+$correct
+[1] 246
+
+> error21
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 562
+
+$correct
+[1] 301
+
+> error23
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 573
+
+$correct
+[1] 290
+
+> error23.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 796
+
+$correct
+[1] 67
+
+> error24
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 564
+
+$correct
+[1] 299
+
+> error24.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 678
+
+$correct
+[1] 185
+
+> error25.alt
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 656
+
+$correct
+[1] 208
+
+> error25
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 569
+
+$correct
+[1] 295
+
+> error31
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 612
+
+$correct
+[1] 251
+
+> error31.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 712
+
+$correct
+[1] 151
+
+> error32
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 560
+
+$correct
+[1] 303
+
+> error32.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 586
+
+$correct
+[1] 277
+
+> error33.alt
+Error: object 'error33.alt' not found
+> error34.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 571
+
+$correct
+[1] 292
+
+> 
+> error34
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 567
+
+$correct
+[1] 296
+
+> error35
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 565
+
+$correct
+[1] 299
+
+> error35.alt
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 562
+
+$correct
+[1] 302
+
+> error41.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 630
+
+$correct
+[1] 233
+
+> error41
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 572
+
+$correct
+[1] 291
+
+> error42
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 567
+
+$correct
+[1] 296
+
+> error42.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 597
+
+$correct
+[1] 266
+
+> error43
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 572
+
+$correct
+[1] 291
+
+> error43.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 574
+
+$correct
+[1] 289
+
+> error44
+Error: object 'error44' not found
+> error45
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 589
+
+$correct
+[1] 275
+
+> error45.at
+Error: object 'error45.at' not found
+> error45.alt
+$total
+[1] 5757
+
+$userItem
+[1] 864
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 719
+
+$correct
+[1] 145
+
+> error51
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 560
+
+$correct
+[1] 303
+
+> error51.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 687
+
+$correct
+[1] 176
+
+> error52.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 539
+
+$correct
+[1] 324
+
+> error52
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 561
+
+$correct
+[1] 302
+
+> error53
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 589
+
+$correct
+[1] 274
+
+> error53.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 558
+
+$correct
+[1] 305
+
+> error54.alt
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 575
+
+$correct
+[1] 288
+
+> error54
+$total
+[1] 5756
+
+$userItem
+[1] 863
+
+$randomItem
+[1] 4893
+
+$mislabelled
+[1] 575
+
+$correct
+[1] 288
