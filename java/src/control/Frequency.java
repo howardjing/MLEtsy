@@ -10,27 +10,18 @@ import java.util.Collections;
 import java.util.Comparator;
 
 
-public class Frequency {
-	
-	public User user;
-    public RandomItems randomItems;
+public class Frequency extends BaseRanker {
 
-    // This assigns each tag value a unique integer
-    public HashMap<String, Integer> allTagsDict;
-
-    public int numUserItems;
-    public int numTotal;
 
 	//public ArrayList<Double> frequencies;
 
 	public double threshold;
 	
 	public Frequency(){
-		user = new User();
-        randomItems = new RandomItems();
+		super();
 		//frequencies = new ArrayList<Double>();
+		threshold = 0;
 
-        allTagsDict = new HashMap<String, Integer>();
 	}
 	
 	public Frequency(User user, RandomItems randomItems) {	
@@ -38,27 +29,11 @@ public class Frequency {
         
         this.user = user;
         this.randomItems = randomItems;
-        
-        this.allTagsDict = this.prepareAllTagsDict();
-
-		this.process();
+		
+		
+		this.findPreferences();
     }
 
-	public HashMap<String,Integer> prepareAllTagsDict() {
-        HashMap<String, Integer> temp = new HashMap<String, Integer>();
-        
-        for (String key : this.user.tagDict.keySet()) {
-            temp.put(key, (temp.size() + 1));
-        }
-        
-      	for (String key : this.randomItems.tagDict.keySet()) {
-            if (!temp.containsKey(key)) {
-                temp.put(key, (temp.size() + 1));
-            }
-        }
-        
-        return temp;
-    }
 
 	public void findFrequencies(User user, ArrayList<Item> items) {
 		double denominator = user.getSum();
@@ -84,51 +59,26 @@ public class Frequency {
 		}
 	}
 	
-	public void rankItems() {
-	Comparator<Item> frequencyComparator = new Comparator<Item>() {
-        public int compare(Item a, Item b) {
-            if (a.similarityScore < b.similarityScore) {
-                return 1;
-            } 
-            else if (a.similarityScore > b.similarityScore) {
-                return -1;
-            } 
-            return 0;   
-        }
-    };
-
-	Collections.sort(user.items, frequencyComparator);
-	Collections.sort(randomItems.items, frequencyComparator);
-	}
-
-	
-	
-	public void process() {
-            findFrequencies(user, user.items);
-			rankItems();
-			findThreshold(user);
-			//System.out.println("User: " + user.items);
-			/*
-			for(Item item : user.items){
-			System.out.println(item.frequency);
-			}
-			*/
-			//System.out.println("Threshold minimum is: " + threshold);
-			//System.out.println(randomItems.items);
-			findFrequencies(user, randomItems.items);
-			rankItems();
-			
-			//System.out.println(randomItems.items);
-			System.out.println("label,id");
-			for (Item sortedItem : randomItems.items) {
-		            System.out.println(sortedItem);
-		        }
-			/*
-			for(Item item : randomItems.items){
-			System.out.println(item.frequency);
-			}
-			*/
-			//findFrequencies(user, );
+	public void findPreferences() {
+		Comparator<Item> frequencyComparator = new Comparator<Item>() {
+	        public int compare(Item a, Item b) {
+	            if (a.similarityScore < b.similarityScore) {
+	                return 1;
+	            } 
+	            else if (a.similarityScore > b.similarityScore) {
+	                return -1;
+	            } 
+	            return 0;   
+	        }
+	    };
+		
+		findFrequencies(user, user.items);
+		Collections.sort(user.items, frequencyComparator);
+		findThreshold(user);
+		
+		findFrequencies(user, randomItems.items);
+		Collections.sort(randomItems.items, frequencyComparator);
+		preferences = randomItems.items;
 	}
 	
 }

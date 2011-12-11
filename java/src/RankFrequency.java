@@ -19,7 +19,7 @@ public class RankFrequency {
             // this is buggy
             //test.printError();
             //System.out.println("label,id");
-            //test.printPreferences();
+            test.printPreferences();
         }
         else {
             System.out.println("usage: java -Xmx2048m -classpath [path to classes] RankRandomItems [path to user's items] [path to random items]");
