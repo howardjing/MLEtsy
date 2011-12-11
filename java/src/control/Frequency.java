@@ -24,11 +24,11 @@ public class Frequency extends BaseRanker {
 
 	}
 	
-	public Frequency(User user, RandomItems randomItems) {	
+	public Frequency(User user, User randomUser) {	
         this();
         
         this.user = user;
-        this.randomItems = randomItems;
+        this.randomUser = randomUser;
 		
 		
 		this.findPreferences();
@@ -76,9 +76,9 @@ public class Frequency extends BaseRanker {
 		Collections.sort(user.items, frequencyComparator);
 		findThreshold(user);
 		
-		findFrequencies(user, randomItems.items);
-		Collections.sort(randomItems.items, frequencyComparator);
-		preferences = randomItems.items;
+		findFrequencies(user, randomUser.items);
+		Collections.sort(randomUser.items, frequencyComparator);
+		preferences = randomUser.items;
 	}
 	
 }

@@ -143,6 +143,10 @@ public class Item {
         return tags;
     }
     
+    public double getPreferenceScore() {
+        return preferenceScore;
+    }
+    
     public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
