@@ -224,6 +224,8 @@
     
     // dictionary of array holding dictionaries
     [randomListings setObject:spaceFiller forKey:@"spaceFiller"];
+    
+    [spaceFiller release];
 }
 
 #pragma mark - PART 2A: RANDOM USERS
@@ -304,6 +306,8 @@
         
         // dictionary of array holding dictionaries
         [randomUsersFavs setObject:randomUserFavs forKey:randomUserID];
+        
+        [randomUserFavs release];
     }
 }
 
@@ -345,6 +349,8 @@
         
         // dictionary of array holding dictionaries
         [randomUsersFavs setObject:chosenUserFavs forKey:chosenUserID];
+        
+        [chosenUserFavs release];
     }
 }
 

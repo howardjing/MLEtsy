@@ -50,6 +50,8 @@
         
         // 5 users that have favorited illustration item 64002509
         NSArray *illustrationTemp = [[NSArray alloc] initWithObjects:@"theYarnKitchen", @"ginaregina", @"leathercrafts1", @"WILDMOONROSEJEWELRY", @"CreatureCollars", nil];
+
+        chosenUserIDs = [[NSMutableArray alloc] init];
         
         [chosenUserIDs addObjectsFromArray:vintageTemp];
         [chosenUserIDs addObjectsFromArray:artTemp];
@@ -61,6 +63,17 @@
         [chosenUserIDs addObjectsFromArray:womenTemp];
         [chosenUserIDs addObjectsFromArray:whiteTemp];
         [chosenUserIDs addObjectsFromArray:illustrationTemp];
+        
+        [vintageTemp release];
+        [artTemp release];
+        [bagsAndPursesTemp release];
+        [homeDecorTemp release];
+        [clothingTemp release];
+        [housewaresTemp release];
+        [printTemp release];
+        [womenTemp release];
+        [whiteTemp release];
+        [illustrationTemp release];
     }
     
     return self;
