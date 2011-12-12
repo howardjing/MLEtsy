@@ -22,6 +22,12 @@ public abstract class BaseRanker {
         preferences = new ArrayList<Item>();
     }
     
+    public void setPreferenceScore() {
+        for (Item item : user.getItems()) {
+            user.preferenceScore = user.preferenceScore + item.getPreferenceScore();
+        }
+    }
+    
     public void printPreferences() {
         for (Item sortedItem : preferences) {
             System.out.println(sortedItem);

@@ -38,6 +38,7 @@ public class Ranker extends BaseRanker{
         }
         
         this.findPreferences();
+        this.setPreferenceScore();
     }
     
     public HashMap<String,Integer> prepareAllTagsDict() {
@@ -149,6 +150,12 @@ public class Ranker extends BaseRanker{
         Collections.sort(randomUser.items, preferenceComparator);
         preferences = (ArrayList<Item>)randomUser.items.clone();
         
+    }
+    
+    public void setPreferenceScore() {
+        for (Item item : user.getItems()) {
+            user.preferenceScore = user.preferenceScore + (item.getPreferenceScore()/user.getItems().size());
+        }
     }
     
 }

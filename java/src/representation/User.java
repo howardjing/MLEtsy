@@ -1,6 +1,7 @@
 package representation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // Users are a list of items
 public class User extends Items{    
@@ -21,6 +22,11 @@ public class User extends Items{
         this.process(filePath);
     }
     
+    public User(String filePath, HashMap<String,String> blackList) {
+        this();
+        this.process(filePath, blackList);
+    }
+    
     public User(int id) {
         this();
         this.id = id;
@@ -32,10 +38,8 @@ public class User extends Items{
         this.process(tags);
     }
     
-    public void findPreferenceScore() {
-        for (Item item : items) {
-            preferenceScore = preferenceScore + item.getPreferenceScore();
-        }
+    public void appendMoreItems(ArrayList<Item> userItems) {
+        items.addAll(userItems);
     }
     
     // ==== GETTERS AND SETTERS ====

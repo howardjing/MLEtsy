@@ -35,6 +35,11 @@ public class Item {
         this.process(data);
     }
     
+    public Item(String data, HashMap<String,String>blackList) {
+        this();
+        this.process(data, blackList);
+    }
+    
     public Item(String[] data, boolean labelled) {
         this();
         this.process(data, labelled);
@@ -103,6 +108,40 @@ public class Item {
         }
     }
     
+    public void process(String data, HashMap<String,String> blackList) {
+        // break up categories
+        StringTokenizer colonTokenizer = new StringTokenizer(data, ":");
+        
+        // first token is the label
+        label = Integer.valueOf(colonTokenizer.nextToken().trim());
+        
+        // second token is the id
+        id = Integer.valueOf(colonTokenizer.nextToken().trim());
+		
+        // tokenize the tags
+        if (colonTokenizer.hasMoreTokens()) {
+            String tagsString = colonTokenizer.nextToken().trim();
+            //System.out.println(tagsString);
+            StringTokenizer commaTokenizer = new StringTokenizer(tagsString, ",");
+            while (commaTokenizer.hasMoreTokens()) {
+                // split out underscores
+                String unprocessed = commaTokenizer.nextToken().toLowerCase();
+                String[] noUnderScores = unprocessed.split("_");
+                String tag = "";
+                for (int i=0; i<noUnderScores.length; i++) {
+                    tag = tag + noUnderScores[i] + " ";
+                }
+                // other processing
+                tag = tag.trim().toLowerCase();
+                
+                //only add the tag if it not blacklisted
+                if (!blackList.containsKey(tag)) {
+                    this.tags.add(tag);
+                }
+            }
+        }
+    }
+    
     public void process(String[] data, boolean labelled) {
 
         if (!labelled) {
@@ -111,6 +150,7 @@ public class Item {
         }
         if (labelled) {
             // first token is the label
+            //System.out.println("Data 0: " + data[0]);
             label = Integer.valueOf(data[0].trim());
             //second token is id
             id = Integer.valueOf(data[1].trim());

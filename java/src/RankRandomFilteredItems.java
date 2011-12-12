@@ -51,7 +51,7 @@ public class RankRandomFilteredItems {
             blackList.put("handmade", "");
             
             User testUser = new User(userItemsPath, blackList);
-            RandomItems testRandomItems = new RandomItems(randomItemsPath, blackList);
+            User testRandomItems = new User(randomItemsPath, blackList);
             Ranker test = new Ranker(testUser, testRandomItems);
               	
             System.out.println("label,id");

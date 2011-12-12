@@ -32,6 +32,7 @@ public class Frequency extends BaseRanker {
 		
 		
 		this.findPreferences();
+		this.setPreferenceScore();
     }
 
 

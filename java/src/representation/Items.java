@@ -79,6 +79,45 @@ public abstract class Items {
             tagDict.put(tag, count);
         }
     }
+    
+    public void process(String filePath, HashMap<String,String> blackList) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));    
+
+            // read in every line
+            String thisLine;
+
+            while( (thisLine = reader.readLine()) != null) {
+                // make a new item
+                Item tempItem = new Item(thisLine, blackList);
+                // put this item in the arrayList if it has not been parsed yet
+                if (!idDict.containsKey(tempItem.id)) {
+
+                    idDict.put(tempItem.id, tempItem);
+                    items.add(tempItem);  
+
+                    // get tag counts from the item
+                    for (String tag : tempItem.getTags()) {
+						tagSum++;
+                        int count = 1;
+                        if (tagDict.containsKey(tag)) {
+                            count = count + tagDict.get(tag);
+                        }
+                        tagDict.put(tag, count);
+                    }
+                }
+                else {
+                    System.out.println("Repeat item: " + tempItem.id);
+                }
+            }
+            reader.close();
+        }
+
+        catch (IOException e) {
+            
+        }
+
+    }
  
     public void sort(){
         ArrayList myArrayList=new ArrayList(tagDict.entrySet());
