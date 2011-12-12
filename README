@@ -4,7 +4,8 @@ recommending items to Etsy user
 RankRandomItems.sh is what we're gonna use to rank items given a text file of user items and a text file of random items
 usage: ./RankRandomItems.sh [pathToUserItems] [pathToRandomItems] [pathToSavedFile]
 ie:    ./RankRandomItems.sh data/MadeUpTrainingData.txt data/MadeUpTestingData.txt output/results.txt
-Note that if with 4000 user items and 5000 random items, it takes around 4 minutes to run on my computer.
+
+RankFrequency.sh is what we're using for the frequency version.
 
 
 *** Can probably ignore this part ***
@@ -16,7 +17,6 @@ java -Xmx2048m -classpath classes FirstRun
 
 *** It would be nice if you read the rest of this though ***
 The -Xmx2048m is to set the max heap size to 2048 mb, since it looks like our hashmaps take a lot of room
-FirstRun takes around 4 min to run on my computer.
 
 DESCRIPTION OF WHAT WE HAVE SO FAR,
 
@@ -24,6 +24,7 @@ JAVA
 THE MOST IMPORTANT ONE:
 control: 
 	- Ranker: the main class for finding preferences
+	- Frequency: ranks by proportion of the user's tags
 	- Helper: contains static functions that handle the math computation stuff
 
 For storing Etsy data:
